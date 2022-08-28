@@ -1,0 +1,36 @@
+
+
+
+<h1> أهلا وسهلا بك إلى صفحة سورجي العربية  </h1>
+
+<!DOCTYPE html>
+<html>
+  
+<head>
+    <title>
+        survery arabic
+    </title>
+</head>
+  
+<body>
+
+    <div id="container">
+    <p>  q.question_arabic_سؤال_عربي   </p>
+      <div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+        <form method="post" name="myform" id="{{q.id}}" style="display: block;">
+          <input class="q" type="radio" id="{{q.id}}" value="choice1" name = answer/>
+          <label for="choice1">  q.asnwer_choice_one_arabic_الإجابة_الأولى_عربى  </label>
+  
+          <input class="q" type="radio" id="{{q.id}}" value="choice2" name = answer/>
+          <label for="choice2">  q.asnwer_choice_two_arabic_الإجابة_الثاني_عربى  </label>
+        </form>
+
+      </div>
+    
+  <button id="submit">Submit</button>
+
+
+</body>
+</html>  

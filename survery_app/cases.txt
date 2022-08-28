@@ -1,0 +1,50 @@
+affinity_1  collection_1 make_1 time_1
+affinity_1  collection_1 make_1 time_2
+affinity_1  collection_1 make_2 time_1
+affinity_1  collection_1 make_2 time_2
+affinity_1  collection_2 make_1 time_1
+affinity_1  collection_2 make_1 time_2
+affinity_1  collection_2 make_2 time_1
+affinity_1  collection_2 make_2 time_2
+affinity_2  collection_1 make_1 time_1
+affinity_2  collection_1 make_1 time_2
+affinity_2  collection_1 make_2 time_1
+affinity_2  collection_1 make_2 time_2
+affinity_2  collection_2 make_1 time_1
+affinity_2  collection_2 make_1 time_2
+affinity_2  collection_2 make_2 time_1
+affinity_2  collection_2 make_2 time_2
+
+
+if affinity_result == affinity_1_heading and collection_result == collection_1_heading and make_result == make_1_heading and time_result == time_1_heading :
+          pdf_answer_case = 1
+        elif affinity_result == affinity_1_heading and collection_result == collection_1_heading and make_result == make_1_heading and time_result == time_2_heading :
+              pdf_answer_case = 2
+        elif affinity_result == affinity_1_heading and collection_result == collection_1_heading and make_result == make_2_heading and time_result == time_1_heading :
+          pdf_answer_case = 3
+        elif affinity_result == affinity_1_heading and collection_result == collection_1_heading and make_result == make_2_heading and time_result == time_2_heading :
+          pdf_answer_case = 4
+        elif affinity_result == affinity_1_heading and collection_result == collection_2_heading and make_result == make_1_heading and time_result == time_1_heading :
+          pdf_answer_case = 5
+        elif affinity_result == affinity_1_heading and collection_result == collection_2_heading and make_result == make_1_heading and time_result == time_2_heading :
+          pdf_answer_case = 6
+        elif affinity_result == affinity_1_heading and collection_result == collection_2_heading and make_result == make_2_heading and time_result == time_1_heading :
+          pdf_answer_case = 7
+        elif affinity_result == affinity_1_heading and collection_result == collection_2_heading and make_result == make_2_heading and time_result == time_2_heading :
+          pdf_answer_case = 8
+        elif affinity_result == affinity_2_heading and collection_result == collection_1_heading and make_result == make_1_heading and time_result == time_1_heading :
+          pdf_answer_case = 9
+        elif affinity_result == affinity_2_heading and collection_result == collection_1_heading and make_result == make_1_heading and time_result == time_2_heading :
+          pdf_answer_case = 10
+        elif affinity_result == affinity_2_heading and collection_result == collection_1_heading and make_result == make_2_heading and time_result == time_1_heading :
+          pdf_answer_case = 11
+        elif affinity_result == affinity_2_heading and collection_result == collection_1_heading and make_result == make_2_heading and time_result == time_2_heading :
+          pdf_answer_case = 12
+        elif affinity_result == affinity_2_heading and collection_result == collection_2_heading and make_result == make_1_heading and time_result == time_1_heading :
+          pdf_answer_case = 13
+        elif affinity_result == affinity_2_heading and collection_result == collection_2_heading and make_result == make_1_heading and time_result == time_2_heading :
+          pdf_answer_case = 14
+        elif affinity_result == affinity_2_heading and collection_result == collection_2_heading and make_result == make_2_heading and time_result == time_1_heading :
+          pdf_answer_case = 15
+        elif affinity_result == affinity_2_heading and collection_result == collection_2_heading and make_result == make_2_heading and time_result == time_2_heading :
+          pdf_answer_case = 16
