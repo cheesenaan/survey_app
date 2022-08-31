@@ -77,17 +77,17 @@ def survey_arabic(request):
                 time_2 = time_2 + q.rank_النقاط
                 time_2_heading = q.title_of_answer_choice_two_عنوان_الإجابة_الثاني
 
-            print("this is the request : ")
-            print(request.POST.get(q.question_arabic_سؤال_عربي))
-            print(affinity_1_heading)
-            print(affinity_2_heading)
-            print(collection_1_heading)
-            print(collection_2_heading)
-            print(make_1_heading)
-            print(make_2_heading)
-            print(time_1_heading)
-            print(time_2_heading)
-            print()
+            # print("this is the request : ")
+            # print(request.POST.get(q.question_arabic_سؤال_عربي))
+            # print(affinity_1_heading)
+            # print(affinity_2_heading)
+            # print(collection_1_heading)
+            # print(collection_2_heading)
+            # print(make_1_heading)
+            # print(make_2_heading)
+            # print(time_1_heading)
+            # print(time_2_heading)
+            # print()
         
         affinity_result = ""
         if affinity_1 > affinity_2:
