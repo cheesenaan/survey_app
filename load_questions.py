@@ -7,6 +7,8 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE" , "survery_project.settings")
 
 # python3 manage.py flush
 # python3 load_questions.py
+# python3 manage.py createsuperuser
+
 import django
 django.setup()
 

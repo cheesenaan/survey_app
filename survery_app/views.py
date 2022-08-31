@@ -14,6 +14,10 @@ file = None
 def home(request):
   return render(request, "home.html")
 
+def RIASEC_survey_arabic(request):
+      return render(request, "RIASEC_survey_arabic.html")
+
+
 
 def survey_arabic(request):
     if request.method == 'POST':
@@ -44,11 +48,11 @@ def survey_arabic(request):
                 affinity_1 = affinity_1 + q.rank_النقاط
                 affinity_1_heading = q.title_of_answer_choice_one_عنوان_الإجابة_الأول
 
-              if q.group_مجموعة == 'Collection of Information':    
+              if q.group_مجموعة == 'Collection of information':    
                 collection_1 = collection_1 + q.rank_النقاط
                 collection_1_heading = q.title_of_answer_choice_one_عنوان_الإجابة_الأول
                 
-              if q.group_مجموعة == 'Make decison':    
+              if q.group_مجموعة == 'Make decision':    
                 make_1 = make_1 + q.rank_النقاط
                 make_1_heading = q.title_of_answer_choice_one_عنوان_الإجابة_الأول
 
@@ -61,11 +65,11 @@ def survey_arabic(request):
                 affinity_2 = affinity_2 + q.rank_النقاط
                 affinity_2_heading = q.title_of_answer_choice_two_عنوان_الإجابة_الثاني
 
-              if q.group_مجموعة == 'Collection of Information':    
+              if q.group_مجموعة == 'Collection of information':    
                 collection_2 = collection_2 + q.rank_النقاط
                 collection_2_heading = q.title_of_answer_choice_two_عنوان_الإجابة_الثاني
                 
-              if q.group_مجموعة == 'Make decison':    
+              if q.group_مجموعة == 'Make decision':    
                 make_2 = make_2 + q.rank_النقاط
                 make_2_heading = q.title_of_answer_choice_two_عنوان_الإجابة_الثاني
 
@@ -75,6 +79,14 @@ def survey_arabic(request):
 
             print("this is the request : ")
             print(request.POST.get(q.question_arabic_سؤال_عربي))
+            print(affinity_1_heading)
+            print(affinity_2_heading)
+            print(collection_1_heading)
+            print(collection_2_heading)
+            print(make_1_heading)
+            print(make_2_heading)
+            print(time_1_heading)
+            print(time_2_heading)
             print()
         
         affinity_result = ""
