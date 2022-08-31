@@ -1,5 +1,7 @@
 from contextlib import _RedirectStream
+import email
 import re
+from unicodedata import name
 from xml.etree.ElementTree import tostring
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -23,6 +25,12 @@ def survey_arabic(request):
     if request.method == 'POST':
         print(request.POST)
         questions=question.objects.all()
+
+        if   request.POST.get(name) == None:
+          return render(request,'name_and_email.html')
+        
+        if   request.POST.get(email) == None:
+          return render(request,'name_and_email.html')
 
         affinity_1 = 0
         affinity_2 = 0
@@ -76,6 +84,9 @@ def survey_arabic(request):
               if q.group_مجموعة == 'Time spending':    
                 time_2 = time_2 + q.rank_النقاط
                 time_2_heading = q.title_of_answer_choice_two_عنوان_الإجابة_الثاني
+              
+              if   request.POST.get(q.question_english_سؤال_الانجليزي) == None:
+                return render(request,'incomplete_survey.html')
 
             # print("this is the request : ")
             # print(request.POST.get(q.question_arabic_سؤال_عربي))
