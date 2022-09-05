@@ -27,6 +27,38 @@ from django.db import models
 #     asnwer_choice_two_english_الإجابة_الثاني_انجليزي = models.CharField(max_length=500)
 #     asnwer_choice_two_arabic_الإجابة_الثاني_عربى = models.CharField(max_length=500)
 
+
+
+class result(models.Model):
+    id = models.AutoField(primary_key=True)
+    time = models.CharField(max_length=500)
+
+    affinity_1 = models.BigIntegerField()
+    affinity_2 = models.BigIntegerField()
+    affinity_result= models.CharField(max_length=500)
+
+    collection_1 = models.BigIntegerField()
+    collection_2 = models.BigIntegerField()
+    collection_result = models.CharField(max_length=500)
+
+    make_1 = models.BigIntegerField()
+    make_2 = models.BigIntegerField()
+    make_result = models.CharField(max_length=500)
+
+    time_1 = models.BigIntegerField()
+    time_2 = models.BigIntegerField()
+    time_result = models.CharField(max_length=500)
+
+    pdf_answer_case = models.BigIntegerField()
+    user_name = models.CharField(max_length=500)
+    user_email = models.CharField(max_length=500)
+    user_phone = models.CharField(max_length=500)
+
+    four_letter_code  = models.CharField(max_length=500)
+    pdf_free = models.CharField(max_length=500)
+    pdf_paid = models.CharField(max_length=500)
+
+
 class question(models.Model):
     id = models.AutoField(primary_key=True)
     group_مجموعة = models.CharField(max_length=256, choices=[('Affinity', 'Affinity'), ('Collection of information' , 'Collection of information'), ('Make decision', 'Make decision') , ('Time spending' , 'Time spending') ])
@@ -44,6 +76,22 @@ class question(models.Model):
     asnwer_choice_two_english_الإجابة_الثاني_انجليزي = models.CharField(max_length=500)
     asnwer_choice_two_arabic_الإجابة_الثاني_عربى = models.CharField(max_length=500)
 
+
+# there will always be only one row in this model. they are just counters
+class group_choice_change(models.Model):
+    id = models.AutoField(primary_key=True)
+
+    affinity_Extrovert_to_Introvert = models.BigIntegerField()
+    affinity_Introvert_to_Extrovert = models.BigIntegerField()
+
+    collection_Sensing_to_Intuition = models.BigIntegerField()
+    collection_Intuition_to_Sensing = models.BigIntegerField()
+
+    make_Thinking_to_Feeling = models.BigIntegerField()
+    make_Feeling_to_Thinking = models.BigIntegerField()
+
+    time_Judging_to_Perceiving = models.BigIntegerField()
+    time_Perceiving_to_Judging = models.BigIntegerField()
 
 class RIASEC(models.Model):
     id = models.AutoField(primary_key=True)

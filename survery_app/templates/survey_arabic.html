@@ -3,10 +3,12 @@
 <div class="container ">
 <h1>Welcome to arabic survey quiz </h1>
 
+
 <div align="right " id="displaytimer"><b>Timer: 0 seconds</b></div>
 
- <form method='post' action=''>
-    {% csrf_token %}
+ <form method='post' action=''">
+    {% csrf_token %}    
+
     {% for q  in questions%}
     <div class="form-group">
         {{q.id}}).    {{q.question_arabic_سؤال_عربي}}
@@ -24,13 +26,15 @@
     {% endfor %}
     <input id='timer' type='hidden' name="timer" value="">
     <br>
-    
-    <label for="name">Name (required):</label><br>
-    <input type="text" id="name" name="name"><br><br>
-    <label for="email">Email (required):</label><br> 
-    <input type="email" id="email" name="email"> <br><br>
-    <label for="phone">Phone Number (optional):</label><br>
-    <input type="phone" id="phone" name="phone"> <br><br>
+
+    <label for="your_name">Your name (required) : </label>
+    <input id="user_name" type="text" name="user_name">
+
+    <label for="user_email">Your email (required): </label>
+    <input id="user_email" type="text" name="user_email">
+
+    <label for="user_phone">Your phone number (optional): </label>
+    <input id="user_phone" type="text" name="user_phone">
 
     <br>
     <button type="submit" class="btn btn-primary">Submit</button>

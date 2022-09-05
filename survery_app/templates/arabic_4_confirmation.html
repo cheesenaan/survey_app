@@ -1,0 +1,26 @@
+
+this is the time spending  group confirmation page
+<h1> confirmation 4/4</h1>
+
+
+<h1>  
+based from the time spending group, you are  : {{ time_result }}
+</h1>
+
+<form method='post' action=''">
+    {% csrf_token %}    
+
+        Do you agree that you are an {{time_result }}? If you do not agree please change your answer
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="time_result" id="gridRadios1" value="option1">
+                agree
+            <input class="form-check-input" type="radio" name="time_result" id="gridRadios2" value="option2">
+                change my answer
+                
+        </div>
+        <br>
+   
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
