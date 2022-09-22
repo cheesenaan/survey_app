@@ -603,7 +603,9 @@ def download_report_free(request):
           from django.conf import settings
           r = result.objects.latest('id') 
           filename = r.pdf_free
-
+          print()
+          print(settings.BASE_DIR)
+          print()
           filepath =  str(settings.BASE_DIR) + "/survery_app/PDF/" + str(filename)
           
           print(filepath)
