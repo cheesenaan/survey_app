@@ -1,16 +1,33 @@
-<h1>welcome </h1> 
-<h1> أهلا بك </h1>
+{% load static %}
 
-<button type="button">
-    <a class="btn btn-primary" href="{% url 'survey_arabic'%}"> Begin the survey in arabic ابدأ الاستطلاع باللغة العربية  </a>
-</button>
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+</head>
 
-<button type="button">
-    <a class="btn btn-primary" href="{% url 'survey_english'%}"> Begin the survey in english  ابدأ الاستطلاع باللغة الإنجليزية  </a>
-</button>
+<body>
 
-<button type="button">
-    <a class="btn btn-primary" href="{% url 'RIASEC_survey_arabic'%}"> Begin the RIASEC survey in arabic  ابدأ الاستطلاع باللغة الإنجليزية  </a>
-</button>
+    <h1>welcome </h1> 
+    <h1> أهلا بك </h1>
 
 
+    <button class="button">
+        <a class="btn btn-primary" href="{% url 'survey_arabic'%}"> Begin the survey in arabic ابدأ الاستطلاع باللغة العربية  </a>
+    </button>
+
+    <br>
+
+
+    <button class="button">
+        <a class="btn btn-primary" href="{% url 'survey_english'%}"> Begin the survey in english  ابدأ الاستطلاع باللغة الإنجليزية  </a>
+    </button>
+
+    <br>
+
+    <button class="button">
+        <a class="btn btn-primary" href="{% url 'RIASEC_survey_arabic'%}"> Begin the RIASEC survey in arabic  ابدأ الاستطلاع باللغة الإنجليزية  </a>
+    </button>
+    
+</body>
+</html>

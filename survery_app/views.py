@@ -14,15 +14,12 @@ from .forms import *
 from fpdf import FPDF
 from django.shortcuts import redirect
 
-
-
 # Create your views here.
 def home(request):
   return render(request, "home.html")
 
 def RIASEC_survey_arabic(request):
       return render(request, "RIASEC_survey_arabic.html")
-
 
 
 def survey_arabic(request):
@@ -410,8 +407,6 @@ def survey_english(request):
         return render(request,'survey_english.html',context)
   
 
-
-
 def arabic_confirmation(request):
   user_result = result.objects.latest('id') 
   if request.method == 'POST':
@@ -429,8 +424,14 @@ def arabic_confirmation(request):
     return redirect('arabic_2_confirmation')
 
   if request.method == 'GET':
+    change = ""
+    if  user_result.affinity_result == "Extrovert":
+          change = change + "Introvert"
+    else:
+          change = change + "Extrovert"
     context = {
-      "affinity_result": user_result.affinity_result
+      "affinity_result": user_result.affinity_result,
+      "change_result": change
     }
     return render(request , 'arabic_confirmation.html' , context)
 
@@ -452,8 +453,15 @@ def arabic_2_confirmation(request):
     return redirect('arabic_3_confirmation')
 
   if request.method == 'GET':
+    change = ""
+    if  user_result.collection_result == "Sensing":
+          change = change + "Intuition"
+    if user_result.collection_result == "Intuition":
+          change = change + "Sensing"
+
     context = {
-      "collection_result" : user_result.collection_result
+      "collection_result" : user_result.collection_result,
+      "change_result": change
     }
     return render(request , 'arabic_2_confirmation.html' , context)
 
@@ -475,12 +483,18 @@ def arabic_3_confirmation(request):
     return redirect('arabic_4_confirmation')
 
   if request.method == 'GET':
+        
+    change = ""
+    if  user_result.make_result == "Feeling":
+          change = change + "Thinking"
+    else:
+          change = change + "Feeling"  
+
     context = {
-      "make_result" : user_result.make_result
+      "make_result" : user_result.make_result,
+      "change_result" : change
     }
     return render(request , 'arabic_3_confirmation.html' , context)
-
-
 
 
 def arabic_4_confirmation(request):
@@ -500,11 +514,19 @@ def arabic_4_confirmation(request):
     return redirect('after_survey_arabic')
 
   if request.method == 'GET':
+        
+
+    change = ""
+    if  user_result.time_result == "Judging":
+          change = change + "Perceiving"
+    else:
+          change = change + "Judging"  
+
     context = {
-      "time_result" : user_result.time_result
+      "time_result" : user_result.time_result,
+      "change_result" : change
     }
     return render(request , 'arabic_4_confirmation.html' , context)
-
 
 
 def after_survey_arabic(request ):
@@ -585,6 +607,23 @@ def download_report_free(request):
           filepath =  str(settings.BASE_DIR) + "/survery_app/PDF/" + str(filename)
           
           print(filepath)
+          #path = open(filepath, 'rb')
+
+          # importing required modules 
+          import PyPDF2 
+
+          # creating a pdf file object 
+          pdfFileObj = open(filepath, 'rb') 
+
+          # creating a pdf reader object 
+          pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
+
+          # creating a page object 
+          pageObj = pdfReader.getPage(0) 
+          print()
+          print(pageObj.extractText()) 
+          pdfFileObj.close() 
+
           path = open(filepath, 'rb')
           # Set the mime type
           mime_type, _ = mimetypes.guess_type(filepath)
@@ -610,3 +649,7 @@ def download_report_paid(request):
           response['Content-Disposition'] = "attachment; filename=%s" % filename
           # Return the response value
           return response
+
+
+def paypal(request):
+  return render(request, "paypal.html")

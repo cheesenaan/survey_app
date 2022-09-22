@@ -1,8 +1,13 @@
+{% load static %}
 
 
 <div class="container ">
-<h1>Welcome to arabic survey quiz </h1>
+<h1> مرحبا بكم في مسابقة استبيان اللغة العربية </h1>
 
+
+<link rel="stylesheet" href="{% static 'base.css' %}">
+
+<body>
 
 <div align="right " id="displaytimer"><b>Timer: 0 seconds</b></div>
 
@@ -10,6 +15,7 @@
     {% csrf_token %}    
 
     {% for q  in questions%}
+    <br>
     <div class="form-group">
         {{q.id}}).    {{q.question_arabic_سؤال_عربي}}
     </div>
@@ -17,6 +23,7 @@
         <div class="form-check">
             <input class="form-check-input" type="radio" name="{{q.question_arabic_سؤال_عربي}}" id="gridRadios1" value="option1">
                 {{q.asnwer_choice_one_arabic_الإجابة_الأولى_عربى}}
+                <br>
             <input class="form-check-input" type="radio" name="{{q.question_arabic_سؤال_عربي}}" id="gridRadios2" value="option2">
                 {{q.asnwer_choice_two_arabic_الإجابة_الثاني_عربى}}
                 
@@ -27,16 +34,24 @@
     <input id='timer' type='hidden' name="timer" value="">
     <br>
 
-    <label for="your_name">Your name (required) : </label>
+    <label for="your_name"> اسمك : </label>
     <input id="user_name" type="text" name="user_name">
 
-    <label for="user_email">Your email (required): </label>
+    <br>
+    <br>
+
+    <label for="user_email"> بريدك الالكتروني : </label>
     <input id="user_email" type="text" name="user_email">
 
-    <label for="user_phone">Your phone number (optional): </label>
+    <br>
+    <br>
+
+    <label for="user_phone"> رقم تليفونك : </label>
     <input id="user_phone" type="text" name="user_phone">
 
     <br>
+    <br>
+
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
   
@@ -58,4 +73,6 @@
     {% endblock script %}
 
 </div>
+
+</body>
  

@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # Enter the app name in following syntax for this to work
     path('', include("survery_app.urls")),
+    path('paypal/', include('paypal.standard.ipn.urls')),
 ]

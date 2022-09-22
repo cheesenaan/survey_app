@@ -1,4 +1,6 @@
 from django.urls import path
+from django.urls import path, include
+
 #now import the views.py file into this code
 from . import views
 urlpatterns=[
@@ -14,6 +16,7 @@ urlpatterns=[
   path('download_report_page', views.download_report_page, name='download_report_page'),
   path('download_report_free', views.download_report_free, name='download_report_free'),
   path('download_report_paid', views.download_report_paid, name='download_report_paid'),
+  path('paypal', views.paypal, name='paypal'),
   
 
   path('RIASEC_survey_arabic', views.RIASEC_survey_arabic, name='RIASEC_survey_arabic'),
