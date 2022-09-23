@@ -655,3 +655,7 @@ def download_report_paid(request):
 
 def paypal(request):
   return render(request, "paypal.html")
+
+
+def paypal_success(request):
+  return render(request, "paypal_success.html")

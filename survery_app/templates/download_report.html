@@ -5,33 +5,21 @@
 <body>
 
 <h1>
-    this is the download page
+    Please choose a report to download.
 </h1>
 
 
-<h1>
+<h3>
 download the free version
 <form method='post' action='download_report_free'">
     {% csrf_token %}    
     <button type="submit" class="btn btn-primary">Download free verison</button>
 </form>  
 
-</h1>
-
-<h1>
-download the full paid version
-</h1>
+</h3>
 
 
-
-<p> PAYAPL WORKING IN PROGRESS </p>
-<form method='post' action='download_report_paid'">
-    {% csrf_token %}    
-    <button type="submit" class="btn btn-primary">Download paid verison</button>
-</form>
-
-
-<h1> pay pal payment feature </h1>
+<h3> download the full paid version </h3>
 
 <form method='post' action='paypal'">
     {% csrf_token %}    
@@ -39,10 +27,7 @@ download the full paid version
 </form>
 
   
-
-
 <p>
-    WORKING ON THIS
 note that if you download the free verison, the paid verison link will be in the free pdf
 
 </p>

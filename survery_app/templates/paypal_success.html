@@ -1,0 +1,12 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'base.css' %}">
+
+<h1> paypal_success </h1>
+
+
+<p> Congratulations. You have made your purchase. Here is your paid report. </p>
+
+<form method='post' action='download_report_paid'">
+    {% csrf_token %}    
+    <button type="submit" class="btn btn-primary">Download paid verison</button>
+</form>
