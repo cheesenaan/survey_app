@@ -24,7 +24,6 @@ SECRET_KEY = 'django-insecure-l37-#6&#jti)pltkoyv(!f_l3chl%a-*h@4vh5s9n3ulpteg38
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = ['*']
 
 
@@ -118,7 +117,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT =  str(BASE_DIR) + "/survery_app/static/"
+STATIC_ROOT =  "env_site/survery_project/survery_project/survery_app/static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
