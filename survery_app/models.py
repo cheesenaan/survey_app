@@ -141,4 +141,4 @@ class report_purchase_successful(models.Model):
 
 class coupon(models.Model):
     coupon = models.CharField(max_length=500)
-    email = models.CharField(max_length=500)
+    #email = models.CharField(max_length=500)
