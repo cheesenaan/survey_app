@@ -7,9 +7,6 @@ from django.db import models
 # python3 manage.py runserver
 
 
-
-
-
 # class question(models.Model):
 #     id = models.AutoField(primary_key=True)
 #     group_مجموعة = models.CharField(max_length=256, choices=[('Affinity', 'Affinity'), ('Collection of Information' , 'Collection of information'), ('Make decison', 'Make decison') , ('Time spending' , 'Time spending') ])
@@ -27,6 +24,7 @@ from django.db import models
 #     asnwer_choice_two_english_الإجابة_الثاني_انجليزي = models.CharField(max_length=500)
 #     asnwer_choice_two_arabic_الإجابة_الثاني_عربى = models.CharField(max_length=500)
 
+# <script src="https://www.paypal.com/sdk/js?client-id=AVg80mzhIITpV4AntbRZIulWJ4YiJIIWhXMcNjl3WeLKD8VBrOs_S-wP9Yi-CHlEqJ2PKZyDCjTEv7A-&currency=USD&intent=capture&enable-funding=venmo" data-sdk-integration-source="integrationbuilder"></script>
 
 
 class result(models.Model):
@@ -57,6 +55,8 @@ class result(models.Model):
     four_letter_code  = models.CharField(max_length=500)
     pdf_free = models.CharField(max_length=500)
     pdf_paid = models.CharField(max_length=500)
+
+    date_and_time_completed = models.CharField(max_length=500)
 
 
 class question(models.Model):
@@ -127,4 +127,18 @@ class RIASEC(models.Model):
     answer_choice_five_arabic = models.CharField(max_length=500)
     
 
+# /first_name/last_name/paid_report_download #
+# that would be the link #
 
+class report_purchase_successful(models.Model):
+    four_letter_code  = models.CharField(max_length=500)
+    user_name = models.CharField(max_length=500)
+    user_email = models.CharField(max_length=500)
+    user_phone = models.CharField(max_length=500)
+    date_and_time_of_purchase = models.DateTimeField()
+
+
+
+class coupon(models.Model):
+    coupon = models.CharField(max_length=500)
+    email = models.CharField(max_length=500)

@@ -1,4 +1,5 @@
 from contextlib import _RedirectStream
+from datetime import datetime
 import email
 from fileinput import filename
 import mimetypes
@@ -13,6 +14,7 @@ from django.http import HttpResponse
 from .forms import *
 from fpdf import FPDF
 from django.shortcuts import redirect
+import datetime
 
 # Create your views here.
 def home(request):
@@ -183,7 +185,8 @@ def survey_arabic(request):
 
           user_name = request.POST.get("user_name"),
           user_email = request.POST.get("user_email"),
-          user_phone = request.POST.get("user_phone")
+          user_phone = request.POST.get("user_phone"),
+          date_and_time_completed = datetime.datetime.now()
           )
         r.save()
         r_id = r.id

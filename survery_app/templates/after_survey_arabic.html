@@ -32,15 +32,22 @@
                 <h5>All the best for next quiz!</h5>
             </div>
         </div>
+
+        <br>
+        <form method='post' action=''">
+            {% csrf_token %}    
+            <h3> Your four letters are {{four_letter_code}} </h3>
+            <br>
+        
+            <button type="submit" class="btn btn-primary"> Download your report </button>
+        </form>
+
     </div>
+
+    
 
 </div>
 
-<form method='post' action=''">
-    {% csrf_token %}    
-    Your four letters are {{four_letter_code}}
-    
-    <button type="submit" class="btn btn-primary"> Download your report </button>
-</form>
+
 
 </body>
