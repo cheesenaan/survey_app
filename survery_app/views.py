@@ -676,53 +676,77 @@ def c(request):
     return redirect('coupon')
 
 def coupon(request):
-  
-  # return redirect(request.META['HTTP_REFERER']) 
-
   from survery_app.models import coupon
+  from datetime import date
 
   if request.method == 'GET':
         return render(request, 'coupon.html')
 
   if request.method == 'POST':  
 
-    # if request.POST.get("no"):
-    #     # return redirect('paypal')
-    #     print("snboerinberoibnero")
-    #     m = "You do not have a coupon code"
-    #     price = 9.99
-    #     context = {
-    #           "message" : m,
-    #           "price" : price,
-    #         }
-    #     return render(request, 'paypal.html' , context)
-
     if request.POST.get("coupon"):
-      c = request.POST.get("coupon")
-      print(c)
+      user_input_coupon = request.POST.get("coupon")
 
-      coupon_codes = coupon.objects.all()
+      all_coupon_codes = coupon.objects.all()
+      for x in all_coupon_codes:
+            print(x.code)
 
-      for x in coupon_codes:
-        if c == x.coupon:
-              # print("match found")
-              # print(x.coupon)
+      for c in all_coupon_codes:
+        print(c.code)
+        if (c.code) == user_input_coupon:
+              
+              print("the code is : ")
+              print(user_input_coupon)
+              print()
+              
+              #expired TODO
+              print("the expire date is : ")
+              print(c.expire_date)
+              print()
+              print("the day today is ")
+              print(date.today())
 
-              m = "your coupon "
-              m = m + x.coupon
-              m = m + " is valid and has been accepted. The price has decreased from $9.99 to $7.00 "
-              price = 7
+              if date.today() > c.expire_date:
+                  c.attempts_after_expiry = c.attempts_after_expiry + 1
+                  c.save()
+                  if c.usage_limit < 0:
+                    c.attempts_after_limit = c.attempts_after_limit + 1
+                    c.save()
+                  context = {
+                        "message" : "coupon is expired, please use another coupon or skip",
+                      }
+                  return render(request, 'coupon.html' , context)
+
+              # limit check
+              if c.usage_limit < 0:
+                 print("limit has been reached")
+                 c.attempts_after_limit = c.attempts_after_limit + 1
+                 c.save()
+                 print(c.attempts_after_limit)
+                 context = {
+                  "message" : "coupon limit has been reached, please use another coupon or skip",
+                }
+                 return render(request, 'coupon.html' , context)
+
+              # valid
+
+              c.usage_limit = c.usage_limit - 1
+              c.save()
+              m = "your coupon " + user_input_coupon +  " is valid and has a worth of " + c.value 
+              price = round(9.99 - float(c.value) , 2)
 
               context = {
                 "message" : m,
                 "price" : price,
               }
               return render(request, 'paypal.html' , context)
-      
-        context = {
+
+    
+    context = {
                 "message" : "coupon is NOT valid , please re try",
               }
-        return render(request, 'coupon.html' , context)
+    return render(request, 'coupon.html' , context)
+        
 
 def no_coupon(request):
   

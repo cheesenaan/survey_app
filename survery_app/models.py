@@ -140,5 +140,10 @@ class report_purchase_successful(models.Model):
 
 
 class coupon(models.Model):
-    coupon = models.CharField(max_length=500)
-    #email = models.CharField(max_length=500)
+    coupon_type = models.CharField(max_length=256, choices=[('name system', 'name system'), ('random number' , 'random number'), ('custom name', 'custom name')])
+    code = models.CharField(max_length=500)
+    value = models.FloatField(default=1)
+    expire_date = models.DateField()
+    usage_limit = models.BigIntegerField()
+    attempts_after_limit = models.BigIntegerField(default=0) # see who is trying to use the coupon after the limit has been reached
+    attempts_after_expiry = models.BigIntegerField(default=0) # see who is trying to use the coupon after it has been expired
