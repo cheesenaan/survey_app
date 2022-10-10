@@ -1,0 +1,36 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'base.css' %}">
+
+<html>
+
+<body>
+
+
+    <br> <br> <br><br> <br> <br> <br><br>  <br> <br> <br><br>  <br> <br> <br><br> 
+    {{ message }}
+
+
+    <form method='post' action=''>
+        {% csrf_token %}    
+        <label for="coupon"> enter a coupon : </label>
+        <input id="coupon" type="text" name="coupon">
+        <button type="submit" class="no"> submit your coupon</button>
+    </form>
+
+    
+
+    <form method='post' action='no_coupon'">
+        {% csrf_token %}    
+        <button type="submit" class="no_coupon"> I do not have a coupon </button>
+    </form>  
+
+</body>
+
+
+
+
+</html>
+
+
+
+  

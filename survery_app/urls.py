@@ -18,7 +18,8 @@ urlpatterns=[
   path('download_report_paid', views.download_report_paid, name='download_report_paid'),
   path('paypal', views.paypal, name='paypal'),
   path('paypal_success', views.paypal_success, name='paypal_success'),
-  
-
+  path('c', views.c, name='c'),
+  path('no_coupon', views.no_coupon, name='no_coupon'),
+  path('coupon', views.coupon, name='coupon'),
   path('RIASEC_survey_arabic', views.RIASEC_survey_arabic, name='RIASEC_survey_arabic'),
 ]

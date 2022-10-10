@@ -594,9 +594,6 @@ def after_survey_arabic(request ):
 
 
 def download_report_page(request):
-  if request.method == 'POST':
-      return redirect(download_report_free)
-
           
   if request.method == 'GET':
       # Load the template
@@ -657,8 +654,81 @@ def download_report_paid(request):
 
 
 def paypal(request):
-  return render(request, "paypal.html")
+    return render(request, "paypal.html")
 
 
 def paypal_success(request):
+  r = result.objects.latest('id') 
+
+  x = report_purchase_successful(
+          four_letter_code = r.four_letter_code,
+          user_name = r.user_name ,
+          user_email = r.user_email,
+          user_phone = r.user_phone,
+          date_and_time_of_purchase = datetime.datetime.now()
+          )
+  x.save()
+
+
   return render(request, "paypal_success.html")
+
+def c(request):
+    return redirect('coupon')
+
+def coupon(request):
+  
+  # return redirect(request.META['HTTP_REFERER']) 
+
+  from survery_app.models import coupon
+
+  if request.method == 'GET':
+        return render(request, 'coupon.html')
+
+  if request.method == 'POST':  
+
+    # if request.POST.get("no"):
+    #     # return redirect('paypal')
+    #     print("snboerinberoibnero")
+    #     m = "You do not have a coupon code"
+    #     price = 9.99
+    #     context = {
+    #           "message" : m,
+    #           "price" : price,
+    #         }
+    #     return render(request, 'paypal.html' , context)
+
+    if request.POST.get("coupon"):
+      c = request.POST.get("coupon")
+      print(c)
+
+      coupon_codes = coupon.objects.all()
+
+      for x in coupon_codes:
+        if c == x.coupon:
+              # print("match found")
+              # print(x.coupon)
+
+              m = "your coupon "
+              m = m + x.coupon
+              m = m + " is valid and has been accepted. The price has decreased from $9.99 to $7.00 "
+              price = 7
+
+              context = {
+                "message" : m,
+                "price" : price,
+              }
+              return render(request, 'paypal.html' , context)
+      
+        context = {
+                "message" : "coupon is NOT valid , please re try",
+              }
+        return render(request, 'coupon.html' , context)
+
+def no_coupon(request):
+  
+  price = 9.99
+  context = {
+                "message" : " you did not use a coupon ",
+                "price" : price,
+              }
+  return render(request, 'paypal.html' , context)
