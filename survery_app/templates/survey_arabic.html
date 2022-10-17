@@ -10,6 +10,9 @@
 
 <div align="right " id="displaytimer"><b>Timer: 0 seconds</b></div>
 
+
+
+
  <form method='post' action=''">
     {% csrf_token %}    
 
@@ -31,9 +34,11 @@
     </div>   
     
     {% endfor %}
+
+
     <input id='timer' type='hidden' name="timer" value="">
     <br>
-
+    
     <label for="your_name"> اسمك : </label>
     <input id="user_name" type="text" name="user_name">
 
@@ -73,6 +78,9 @@
     {% endblock script %}
 
 </div>
+
+
+
 
 </body>
  
