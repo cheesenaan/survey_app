@@ -589,6 +589,8 @@ def after_survey_arabic(request ):
                 'four_letter_code': four_letter_code
 
                   }
+
+    
       
     return render(request, "after_survey_arabic.html" , context)
 
@@ -600,6 +602,7 @@ def download_report_page(request):
       return render(request, 'download_report.html')
 
 def download_report_free(request):
+
           from django.conf import settings
           r = result.objects.latest('id') 
           filename = r.pdf_free
@@ -610,6 +613,40 @@ def download_report_free(request):
           
           print(filepath)
           #path = open(filepath, 'rb')
+
+          # new
+          pdf_file_name = str(r.user_name) + "_" + str(r.four_letter_code) + '.pdf'
+          # path_name = 'PDF/' + pdf_file_name
+
+          #pdf = FPDF()
+          pdf = FPDF('P', 'mm', (297.18, 420.116))
+
+              # Add a page
+
+          pdf.add_page()
+          pdf.set_font("Arial", size = 15)
+          pdf.cell(200, 10, txt = "welcome to your report", ln = 1, align = 'C')
+          pdf.cell(200, 10, txt = "thank you for downloading dear , " +  r.user_name, ln = 1, align = 'L')
+          pdf.cell(200, 10, txt = "" , ln = 1, align = 'L')
+          pdf.cell(200, 10, txt = "your phone number is " +  r.user_phone, ln = 1, align = 'L')
+          pdf.cell(200, 10, txt = "your email is " +  r.user_email, ln = 1, align = 'L')
+          pdf.cell(200, 10, txt = "your link to the paid version is : TODO" , ln = 1, align = 'L')
+          pdf.cell(200, 10, txt = "" , ln = 1, align = 'L')
+              
+              # add another cell
+          pdf.cell(200, 10, txt = "this is the free version", ln = 2, align = 'C')
+
+          pdf.cell(200, 10, txt = 'according to the affinity group, you are : ' +  r.affinity_result , ln = 2, align = 'L')
+          pdf.cell(200, 10, txt = 'according to the collection of information group, you are : ' + r.collection_result , ln = 2, align = 'L')
+          pdf.cell(200, 10, txt = 'according to the make decision group, you are : ' + r.make_result , ln = 2, align = 'L')
+          pdf.cell(200, 10, txt = 'according to the time spending group, you are : ' + r.time_result , ln = 2, align = 'L')
+
+          pdf.cell(200, 10, txt = 'your code is : ' + r.four_letter_code , ln = 2, align = 'L')
+
+        
+              # save the pdf with name .pdf
+          pdf.output(pdf_file_name)
+          pdf = pdf_file_name
 
           # importing required modules 
           import PyPDF2 
@@ -626,7 +663,22 @@ def download_report_free(request):
           print(pageObj.extractText()) 
           pdfFileObj.close() 
 
-          path = open(filepath, 'rb')
+
+          from PyPDF2 import PdfMerger
+          pdfs = [pdf, filepath]
+          merger = PdfMerger()
+
+          for pdf in pdfs:
+              merger.append(pdf)
+
+          merger.write("result.pdf")
+          merger.close()
+
+
+
+          path = open('result.pdf', 'rb')
+          filename = ""
+          filename = pdf_file_name
           # Set the mime type
           mime_type, _ = mimetypes.guess_type(filepath)
           # Set the return value of the HttpResponse
@@ -756,3 +808,5 @@ def no_coupon(request):
                 "price" : price,
               }
   return render(request, 'paypal.html' , context)
+
+
