@@ -31,15 +31,18 @@ def survey_arabic(request):
         # print(request.GET.get("user_name"))
 
         # get user name and email
-        if request.GET.get("user_name") == "":
+        if request.POST.get("user_name") == "":
           return render(request, "name_and_email.html")
           
-        if request.GET.get("user_email") == "":
+        if request.POST.get("user_email") == "":
           return render(request, "name_and_email.html")
 
-        user_name = request.GET.get("user_name")
-        user_email = request.GET.get("user_email")
-        user_phone = request.GET.get("user_phone")
+        if '@' not in request.POST.get("user_email"):
+            return render(request, "user_email_error.html")
+
+        user_name = request.POST.get("user_name")
+        user_email = request.POST.get("user_email")
+        user_phone = request.POST.get("user_phone")
         
 
         affinity_1 = 0
@@ -219,7 +222,16 @@ def survey_arabic(request):
   
 
 def arabic_confirmation(request , user_id , user_name):
-  user_result = result.objects.latest('id') 
+  # user_result = result.objects.latest('id') 
+  user_result = result.objects.all()
+  print(user_id)
+  for x in user_result:
+        print(x.id)
+        print()
+        if str(x.id) == str(user_id):
+              print("found")
+              user_result = x
+
   if request.method == 'POST':
     x = group_choice_change.objects.latest('id') 
     if request.POST.get("affinity_result") == "option2":
@@ -235,6 +247,7 @@ def arabic_confirmation(request , user_id , user_name):
     return redirect('arabic_2_confirmation' , user_id , user_name)
 
   if request.method == 'GET':
+
     change = ""
     if  user_result.affinity_result == "Extrovert":
           change = change + "Introvert"
@@ -248,7 +261,17 @@ def arabic_confirmation(request , user_id , user_name):
 
 
 def arabic_2_confirmation(request , user_id , user_name):
-  user_result = result.objects.latest('id') 
+  #user_result = result.objects.latest('id') 
+
+  user_result = result.objects.all()
+  print(user_id)
+  for x in user_result:
+        print(x.id)
+        print()
+        if str(x.id) == str(user_id):
+              print("found")
+              user_result = x
+
   if request.method == 'POST':
     x = group_choice_change.objects.latest('id') 
     if request.POST.get("collection_result") == "option2":
@@ -278,7 +301,17 @@ def arabic_2_confirmation(request , user_id , user_name):
 
 
 def arabic_3_confirmation(request , user_id , user_name):
-  user_result = result.objects.latest('id') 
+  #user_result = result.objects.latest('id') 
+
+  user_result = result.objects.all()
+  print(user_id)
+  for x in user_result:
+        print(x.id)
+        print()
+        if str(x.id) == str(user_id):
+              print("found")
+              user_result = x
+
   if request.method == 'POST':
     x = group_choice_change.objects.latest('id') 
     if request.POST.get("make_result") == "option2":
@@ -309,7 +342,18 @@ def arabic_3_confirmation(request , user_id , user_name):
 
 
 def arabic_4_confirmation(request , user_id , user_name):
-  user_result = result.objects.latest('id') 
+  
+  #user_result = result.objects.latest('id') 
+
+  user_result = result.objects.all()
+  print(user_id)
+  for x in user_result:
+        print(x.id)
+        print()
+        if str(x.id) == str(user_id):
+              print("found")
+              user_result = x
+
   if request.method == 'POST':
     x = group_choice_change.objects.latest('id') 
     if request.POST.get("time_result") == "option2":
@@ -348,7 +392,16 @@ def after_survey_arabic(request , user_id , user_name):
   
    if request.method == 'GET':
 
-    r = result.objects.latest('id') 
+    r = result.objects.all()
+    print(user_id)
+    for x in r:
+          print(x.id)
+          print()
+          if str(x.id) == str(user_id):
+                print("found")
+                r = x
+
+    #r = result.objects.latest('id') 
     four_letter_code = ""
 
     # for some reason, Intuition is not I but N in the pdf drive.
@@ -411,8 +464,25 @@ def download_report_page(request , user_id , user_name):
 
 def download_report_free(request , user_id , user_name):
 
+
+          user_name = user_name.replace(' ' , '%20')
+          print()
+          print("this is the username")
+          print(user_name)
+          print()
+
           from django.conf import settings
-          r = result.objects.latest('id') 
+
+          r = result.objects.all()
+          print(user_id)
+          for x in r:
+                print(x.id)
+                print()
+                if str(x.id) == str(user_id):
+                      print("found")
+                      r = x
+
+          #r = result.objects.latest('id') 
           filename = r.pdf_free
           print()
           print(settings.BASE_DIR)
@@ -467,7 +537,7 @@ def download_report_free(request , user_id , user_name):
           pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
 
           # creating a page object 
-          pageObj = pdfReader.getPage(0) 
+          pageObj = pdfReader.getPage(0)
           print()
           print(pageObj.extractText()) 
           pdfFileObj.close() 
@@ -482,8 +552,6 @@ def download_report_free(request , user_id , user_name):
 
           merger.write("result.pdf")
           merger.close()
-
-
 
           path = open('result.pdf', 'rb')
           filename = ""
@@ -521,7 +589,16 @@ def paypal(request):
 
 
 def paypal_success(request , user_id , user_name):
-  r = result.objects.latest('id') 
+  #r = result.objects.latest('id') 
+
+  r = result.objects.all()
+  print(user_id)
+  for x in r:
+        print(x.id)
+        print()
+        if str(x.id) == str(user_id):
+              print("found")
+              r = x
 
   x = report_purchase_successful(
           four_letter_code = r.four_letter_code,
@@ -619,12 +696,6 @@ def no_coupon(request , user_id , user_name):
                 "price" : price,
               }
   return render(request, 'paypal.html' , context)
-
-
-
-
-
-
 
 
 def RIASEC_survey_arabic(request):

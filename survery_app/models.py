@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 
 # DELETE FROM survery_app_question; DELETE FROM SQLite_sequence WHERE name='survery_app_question';
@@ -81,17 +82,17 @@ class question(models.Model):
 class group_choice_change(models.Model):
     id = models.AutoField(primary_key=True)
 
-    affinity_Extrovert_to_Introvert = models.BigIntegerField()
-    affinity_Introvert_to_Extrovert = models.BigIntegerField()
+    affinity_Extrovert_to_Introvert = models.BigIntegerField(default=0)
+    affinity_Introvert_to_Extrovert = models.BigIntegerField(default=0)
 
-    collection_Sensing_to_Intuition = models.BigIntegerField()
-    collection_Intuition_to_Sensing = models.BigIntegerField()
+    collection_Sensing_to_Intuition = models.BigIntegerField(default=0)
+    collection_Intuition_to_Sensing = models.BigIntegerField(default=0)
 
-    make_Thinking_to_Feeling = models.BigIntegerField()
-    make_Feeling_to_Thinking = models.BigIntegerField()
+    make_Thinking_to_Feeling = models.BigIntegerField(default=0)
+    make_Feeling_to_Thinking = models.BigIntegerField(default=0)
 
-    time_Judging_to_Perceiving = models.BigIntegerField()
-    time_Perceiving_to_Judging = models.BigIntegerField()
+    time_Judging_to_Perceiving = models.BigIntegerField(default=0)
+    time_Perceiving_to_Judging = models.BigIntegerField(default=0)
 
 class RIASEC(models.Model):
     id = models.AutoField(primary_key=True)
@@ -147,3 +148,20 @@ class coupon(models.Model):
     usage_limit = models.BigIntegerField()
     attempts_after_limit = models.BigIntegerField(default=0) # see who is trying to use the coupon after the limit has been reached
     attempts_after_expiry = models.BigIntegerField(default=0) # see who is trying to use the coupon after it has been expired
+
+
+
+# model of who downloaded
+class free_download(models.Model):
+    result_id = models.BigIntegerField()
+    user_name = models.CharField(max_length=500)
+    user_email = models.CharField(max_length=500)
+    link = models.CharField(max_length=500)
+
+
+# who downloaded
+class paid_download(models.Model):
+    result_id = models.BigIntegerField()
+    user_name = models.CharField(max_length=500)
+    user_email = models.CharField(max_length=500)
+    link = models.CharField(max_length=500)
