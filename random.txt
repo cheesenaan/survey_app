@@ -1,0 +1,11 @@
+pdf qr code
+pdf fix
+pdf watermark
+pdf design 
+
+
+models: result id of those who downloaded free and paid respectively 
+
+
+css for phone users to make it more user friendly 
+

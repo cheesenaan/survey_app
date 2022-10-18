@@ -57,6 +57,8 @@ class result(models.Model):
     pdf_free = models.CharField(max_length=500)
     pdf_paid = models.CharField(max_length=500)
 
+    link = models.CharField(max_length=500)
+
     date_and_time_completed = models.CharField(max_length=500)
 
 

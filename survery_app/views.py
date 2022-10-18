@@ -482,6 +482,7 @@ def download_report_free(request , user_id , user_name):
                       print("found")
                       r = x
 
+          
           #r = result.objects.latest('id') 
           filename = r.pdf_free
           print()
@@ -509,6 +510,8 @@ def download_report_free(request , user_id , user_name):
           pdf.cell(200, 10, txt = "your phone number is " +  r.user_phone, ln = 1, align = 'L')
           pdf.cell(200, 10, txt = "your email is " +  r.user_email, ln = 1, align = 'L')
           l = 'http://sulemaan.pythonanywhere.com/'+ user_id + '/' + user_name + '/' + 'download_report_page'
+          r.link = l
+          r.save()
           pdf.cell(200, 10, txt = "your link to the paid version is :" + l, ln = 1, align = 'L')
           pdf.cell(200, 10, txt = "" , ln = 1, align = 'L')
               
@@ -522,6 +525,10 @@ def download_report_free(request , user_id , user_name):
 
           pdf.cell(200, 10, txt = 'your code is : ' + r.four_letter_code , ln = 2, align = 'L')
 
+          # import qrcode
+          # import qrcode.image.svg
+          # img = qrcode.make(l , image_factory=qrcode.image.svg.SvgImage)
+          # pdf.image(img)
         
               # save the pdf with name .pdf
           pdf.output(pdf_file_name)
