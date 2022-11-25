@@ -464,114 +464,82 @@ def download_report_page(request , user_id , user_name):
 
 def download_report_free(request , user_id , user_name):
 
-
-          user_name = user_name.replace(' ' , '%20')
-          print()
-          print("this is the username")
-          print(user_name)
-          print()
-
           from django.conf import settings
+          import PyPDF2 
+          from PyPDF2 import PdfMerger
 
-          r = result.objects.all()
+          # get user details from backend
+          user_result = result.objects.all()
           print(user_id)
-          for x in r:
+          for x in user_result:
                 print(x.id)
                 print()
                 if str(x.id) == str(user_id):
                       print("found")
-                      r = x
+                      user_result = x
 
-          
-          #r = result.objects.latest('id') 
+          r = user_result
           filename = r.pdf_free
-          print()
-          print(settings.BASE_DIR)
-          print()
-          filepath =  str(settings.BASE_DIR) + "/survery_app/PDF/" + str(filename)
-          
-          print(filepath)
-          #path = open(filepath, 'rb')
 
-          # new
-          pdf_file_name = str(user_id) + "_" + user_name + "_" + 'CODE' + '.pdf'
-          # path_name = 'PDF/' + pdf_file_name
+          # report file name fromm 16 reports
+          personal_user_report =  str(settings.BASE_DIR) + "/survery_app/PDF/" + str(filename)
+          pdf_file_name = str(user_id) + "_" + user_name + "_" + r.four_letter_code + '.pdf'
 
-          #pdf = FPDF()
           pdf = FPDF('P', 'mm', (297.18, 420.116))
+          if pdf : 
+            pdf.add_page()
+            pdf.set_font("Arial", size = 15)
+            pdf.cell(200, 10, txt = "welcome to your report", ln = 1, align = 'C')
+            pdf.cell(200, 10, txt = "thank you for downloading dear , " +  r.user_name, ln = 1, align = 'L')
+            pdf.cell(200, 10, txt = "" , ln = 1, align = 'L')
+            pdf.cell(200, 10, txt = "your phone number is " +  r.user_phone, ln = 1, align = 'L')
+            pdf.cell(200, 10, txt = "your email is " +  r.user_email, ln = 1, align = 'L')
+            user_name = user_name.replace(' ' , '%20' )
 
-              # Add a page
+            l = 'http://sulemaan.pythonanywhere.com/'+ user_id + '/' + user_name + '/' + 'download_report_page'
+            r.link = l
+            r.save()
+            pdf.cell(200, 10, txt = "your link to the paid version is :" + l, ln = 1, align = 'L')
+            pdf.cell(200, 10, txt = "" , ln = 1, align = 'L')
+                
+                # add another cell
+            pdf.cell(200, 10, txt = "this is the free version", ln = 2, align = 'C')
 
-          pdf.add_page()
-          pdf.set_font("Arial", size = 15)
-          pdf.cell(200, 10, txt = "welcome to your report", ln = 1, align = 'C')
-          pdf.cell(200, 10, txt = "thank you for downloading dear , " +  r.user_name, ln = 1, align = 'L')
-          pdf.cell(200, 10, txt = "" , ln = 1, align = 'L')
-          pdf.cell(200, 10, txt = "your phone number is " +  r.user_phone, ln = 1, align = 'L')
-          pdf.cell(200, 10, txt = "your email is " +  r.user_email, ln = 1, align = 'L')
-          l = 'http://sulemaan.pythonanywhere.com/'+ user_id + '/' + user_name + '/' + 'download_report_page'
-          r.link = l
-          r.save()
-          pdf.cell(200, 10, txt = "your link to the paid version is :" + l, ln = 1, align = 'L')
-          pdf.cell(200, 10, txt = "" , ln = 1, align = 'L')
-              
-              # add another cell
-          pdf.cell(200, 10, txt = "this is the free version", ln = 2, align = 'C')
+            pdf.cell(200, 10, txt = 'according to the affinity group, you are : ' +  r.affinity_result , ln = 2, align = 'L')
+            pdf.cell(200, 10, txt = 'according to the collection of information group, you are : ' + r.collection_result , ln = 2, align = 'L')
+            pdf.cell(200, 10, txt = 'according to the make decision group, you are : ' + r.make_result , ln = 2, align = 'L')
+            pdf.cell(200, 10, txt = 'according to the time spending group, you are : ' + r.time_result , ln = 2, align = 'L')
 
-          pdf.cell(200, 10, txt = 'according to the affinity group, you are : ' +  r.affinity_result , ln = 2, align = 'L')
-          pdf.cell(200, 10, txt = 'according to the collection of information group, you are : ' + r.collection_result , ln = 2, align = 'L')
-          pdf.cell(200, 10, txt = 'according to the make decision group, you are : ' + r.make_result , ln = 2, align = 'L')
-          pdf.cell(200, 10, txt = 'according to the time spending group, you are : ' + r.time_result , ln = 2, align = 'L')
+            pdf.cell(200, 10, txt = 'your code is : ' + r.four_letter_code , ln = 2, align = 'L')
 
-          pdf.cell(200, 10, txt = 'your code is : ' + r.four_letter_code , ln = 2, align = 'L')
-
-          # import qrcode
-          # import qrcode.image.svg
-          # img = qrcode.make(l , image_factory=qrcode.image.svg.SvgImage)
-          # pdf.image(img)
         
-              # save the pdf with name .pdf
+          # save the pdf with name .pdf
           pdf.output(pdf_file_name)
           pdf = pdf_file_name
 
-          # importing required modules 
-          import PyPDF2 
 
-          # creating a pdf file object 
-          pdfFileObj = open(filepath, 'rb') 
-
-          # creating a pdf reader object 
-          pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
-
-          # creating a page object 
-          pageObj = pdfReader.getPage(0)
-          print()
-          print(pageObj.extractText()) 
-          pdfFileObj.close() 
-
-
-          from PyPDF2 import PdfMerger
-          pdfs = [pdf, filepath]
+          import fitz
+          import pymupdf
+          pdf_skip_first_page = open(personal_user_report, 'rb') 
+          pdf_skip_first_page.delete_page(0)
+          # pdf_skip_first_page.close() 
+          
+          # merge the new page and the report pdf
+          pdfs = [pdf, pdf_skip_first_page]
           merger = PdfMerger()
-
           for pdf in pdfs:
               merger.append(pdf)
 
           merger.write("result.pdf")
           merger.close()
 
+          # return http response of the pdf file 
           path = open('result.pdf', 'rb')
           filename = ""
           filename = pdf_file_name
-          # Set the mime type
-          mime_type, _ = mimetypes.guess_type(filepath)
-          # Set the return value of the HttpResponse
+          mime_type, _ = mimetypes.guess_type(pdf_skip_first_page)
           response = HttpResponse(path, content_type=mime_type)
-          # print("the path is ")
-          # print(path)
-          # Set the HTTP header for sending to browser
           response['Content-Disposition'] = "attachment; filename=%s" % filename
-          # Return the response value
           return response
 
 def download_report_paid(request , user_id , user_name):
@@ -679,7 +647,7 @@ def coupon(request , user_id , user_name):
 
               c.usage_limit = c.usage_limit - 1
               c.save()
-              m = "your coupon " + user_input_coupon +  " is valid and has a worth of " + c.value 
+              m = "your coupon " + user_input_coupon +  " is valid and has a worth of " + str(c.value) 
               price = round(9.99 - float(c.value) , 2)
 
               context = {

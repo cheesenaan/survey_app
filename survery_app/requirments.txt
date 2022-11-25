@@ -1,3 +1,8 @@
 pip install whitenoise
 python manage.py collectstatic
 pip install qrcode
+pip install --upgrade pymupdf
+pip install wheel
+pip install port
+
+
