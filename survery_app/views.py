@@ -518,8 +518,8 @@ def download_report_free(request , user_id , user_name):
           pdf = pdf_file_name
 
 
-          import fitz
-          import pymupdf
+          # import fitz
+          # import pymupdf
           pdf_skip_first_page = open(personal_user_report, 'rb') 
           pdf_skip_first_page.delete_page(0)
           # pdf_skip_first_page.close() 
