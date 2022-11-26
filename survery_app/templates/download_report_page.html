@@ -1,41 +1,49 @@
-{% load static %}
-<head> 
-    <link href="static/css/style.css" rel="stylesheet">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-</head>
+
+{% extends 'index.html' %}
+
+{% block content %}
+    <br>  <br> 
+    <head> <title> results </title </head>
+<body> 
 
 
-<body>
+<section id="results" class="results">
+        <div class="container">
 
-<h1>
-    Please choose a report to download.
-</h1>
-
-
-<h3>
-Download the free version 
-</h3>
-
-<form method='post' action='download_report_free'">
-    {% csrf_token %}    
-    <button type="submit" class="btn btn-primary">Download free verison</button>
-</form>  
+            <div class="d-flex flex-column justify-content-center align-items-center">
+                
+                <p> Please choose a report to download. </p> <br> 
 
 
-
-<h3> Proceed to download the full paid version </h3>
-<form method='post' action='c'">
-    {% csrf_token %}    
-    <button type="submit" class="btn btn-primary"> Proceed </button>
-</form>
-
-  
-<p>
-note that if you download the free verison, the paid verison link will be in the free pdf
-
-</p>
-
+                <h3> Standard edition </h3> 
+                <p> Your personal link to the paid version will be in the standard edition pdf</p>
+                    
+                <form method='post' action='download_report_free'">
+                    {% csrf_token %}    
+                    <button type="submit" class="btn btn-primary">Download</button>
+                </form>   <br> <br>  <br> <br> <br> 
+                
+                
+                
+                <h3> Download the premium edition </h3>
+                <form method='post' action='c'">
+                    {% csrf_token %}    
+                    <button type="submit" class="btn btn-primary"> Download </button>
+                </form>
+                
+                <br> <br> 
+                <p> Not sure which editon to purchase? Click <a href="#"> here </a> to see the differences </p>
+                
+            </div>
+</section>
 
 </body>
+
+
+</html>
+
+{% endblock %}
+
+
 
 

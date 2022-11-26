@@ -224,12 +224,14 @@ def survey_arabic(request):
 def arabic_confirmation(request , user_id , user_name):
   # user_result = result.objects.latest('id') 
   user_result = result.objects.all()
-  print(user_id)
+  # print(user_id)
   for x in user_result:
-        print(x.id)
-        print()
+        # print(x.id)
+        # print()
         if str(x.id) == str(user_id):
-              print("found")
+              print("user has been found in the database and his id is ")
+              print(x.id)
+              print()
               user_result = x
 
   if request.method == 'POST':

@@ -1,58 +1,64 @@
-{% load static %}
+{% extends 'index.html' %}
+
+{% block content %}
+    <br> 
+    <head> <title> results </title </head>
+<body> 
 
 
-<head> 
-    <link href="static/css/style.css" rel="stylesheet">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-</head>
+<section id="results" class="results">
+        <div class="container">
 
+            <div class="d-flex flex-column justify-content-center align-items-center">
 
-<body>
+                <p> result </p> 
+                <h5> Your personaility code is : <b> {{four_letter_code}} </b>  </h5>
 
-<div class="container ">
-        
-    <div class="card-columns" style="padding: 10px; margin: 20px;">
-        <div class="card" align="centre " style="width: width=device-width: unset;; border:5px black solid">
-            <img class="card-img-top" src="http://kmit.in/emagazine/wp-content/uploads/2018/02/karnataka-results.jpg" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">Score: {{score}}</h5>
-
-                <p class="card-text">Time Taken: {{time}} seconds</p>
-
-                <p class="card-text"> your affinity group is : {{affinity_result}}</p>
-                
-
-                <p class="card-text"> your collection group is : {{collection_result}}</p>
-
-                <p class="card-text"> your make group is : {{make_result}}</p>
-
-                <p class="card-text"> your time group is : {{time_result}}</p>
-
+                <div class="card-columns" style="padding: auto; margin: auto;">
+                    <div class="card" align="centre " style="width: width=device-width: unset;; border:5px black solid">
+                        <img class="card-img-top" src="http://kmit.in/emagazine/wp-content/uploads/2018/02/karnataka-results.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Score: {{score}}</h5>
             
-                <p class="card-text"> pdf_answer_case : {{pdf_answer_case}}</p>
+                            <p class="card-text">Time Taken: {{time}} seconds , see where you are on the leaderboard </p> 
+                            
+            
+                            <p class="card-text"> your affinity group is : {{affinity_result}}</p>
+                            
+            
+                            <p class="card-text"> your collection group is : {{collection_result}}</p>
+            
+                            <p class="card-text"> your make group is : {{make_result}}</p>
+            
+                            <p class="card-text"> your time group is : {{time_result}}</p>
+            
+                        
+                            <p class="card-text"> pdf_answer_case : {{pdf_answer_case}}</p>
+            
+                            
+                            <p class="card-text"> four_letter_code : <b> {{four_letter_code}} </b></p>
+            
+                            <h5>All the best for next quiz!</h5>
+                        </div>
+                    </div>
+            
+                    <br>
+                    <form method='post' action=''">
+                        {% csrf_token %}    
+                        
+                        <br>
+                    
+                        <button type="submit" class="btn btn-primary"> Download your report </button>
+                    </form>
 
-                
-                <p class="card-text"> four_letter_code : {{four_letter_code}}</p>
-
-                <h5>All the best for next quiz!</h5>
             </div>
-        </div>
-
-        <br>
-        <form method='post' action=''">
-            {% csrf_token %}    
-            <h3> Your four letters are {{four_letter_code}} </h3>
-            <br>
-        
-            <button type="submit" class="btn btn-primary"> Download your report </button>
-        </form>
-
-    </div>
-
-    
-
-</div>
-
-
+</section>
 
 </body>
+
+
+</html>
+
+{% endblock %}
+
+

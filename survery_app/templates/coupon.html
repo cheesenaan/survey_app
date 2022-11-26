@@ -1,39 +1,56 @@
-{% load static %}
 
-<head> 
-    <link href="static/css/style.css" rel="stylesheet">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-</head>
+{% extends 'index.html' %}
 
-<html>
-
-<body>
+{% block content %}
+    <br>  <br> 
+    <head> <title> coupon </title </head>
+<body> 
 
 
-    <br> <br> <br><br> <br> <br> <br><br>  <br> <br> <br><br>  <br> <br> <br><br> 
-    {{ message }}
+<section id="results" class="results">
+        <div class="container">
+
+            <div class="d-flex flex-column justify-content-center align-items-center">
+                
+                <br> <br> <br><br> <br> 
+                {{ message }}
+                <p> If you have a coupon, you can enter it to get a discount </p>
+                <p> If you want to check the value and/or limit of the coupon, please click here </p>
+                <p> Learn more about coupon</p>
 
 
-    <form method='post' action=''>
-        {% csrf_token %}    
-        <label for="coupon"> enter a coupon : </label>
-        <input id="coupon" type="text" name="coupon">
-        <button type="submit" class="no"> submit your coupon</button>
-    </form>
+                <br><br> <br> <br><br> <br> 
+                <form method='post' action=''>
+                    {% csrf_token %}    
+                    <label for="coupon"> enter a coupon : </label>
+                    <input id="coupon" type="text" name="coupon"> 
+                    <!-- <button type="submit" class="no"> submit your coupon</button> <br> -->
+                    <button type="submit" class="btn btn-primary"> submit your coupon </button>
 
-    
-
-    <form method='post' action='no_coupon'">
-        {% csrf_token %}    
-        <button type="submit" class="no_coupon"> I do not have a coupon </button>
-    </form>  
+                </form><br>
+            
+                
+            
+                <form method='post' action='no_coupon'">
+                    {% csrf_token %}    
+                    <!-- <button type="submit" class="no_coupon"> I do not have a coupon </button> -->
+                    <button type="submit" class="btn btn-primary"> I do not have a coupon </button>
+                </form>  
+            
+                
+            </div>
+</section>
 
 </body>
 
 
-
-
 </html>
+
+{% endblock %}
+
+
+
+
 
 
 
