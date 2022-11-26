@@ -15,7 +15,7 @@ import django
 django.setup()
 
 sys.path.append("/Users/cheesenaan/Documents/qatar work/project/env_site/survery_project/survery_app")
-from survery_app.models import question
+from survery_app.models import question, group_choice_change
 
 
 
@@ -53,3 +53,6 @@ with open('backend.csv') as file:
             asnwer_choice_two_arabic_الإجابة_الثاني_عربى = INFP_Arabic
         )
         q.save()
+
+    g = group_choice_change()
+    g.save()
