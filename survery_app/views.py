@@ -485,62 +485,74 @@ def download_report_free(request , user_id , user_name):
           personal_user_report =  str(settings.BASE_DIR) + "/survery_app/PDF/" + str(filename)
           pdf_file_name = str(user_id) + "_" + user_name + "_" + r.four_letter_code + '.pdf'
 
-          pdf = FPDF('P', 'mm', (297.18, 420.116))
-          if pdf : 
-            pdf.add_page()
-            pdf.set_font("Arial", size = 15)
-            pdf.cell(200, 10, txt = "welcome to your report", ln = 1, align = 'C')
-            pdf.cell(200, 10, txt = "thank you for downloading dear , " +  r.user_name, ln = 1, align = 'L')
-            pdf.cell(200, 10, txt = "" , ln = 1, align = 'L')
-            pdf.cell(200, 10, txt = "your phone number is " +  r.user_phone, ln = 1, align = 'L')
-            pdf.cell(200, 10, txt = "your email is " +  r.user_email, ln = 1, align = 'L')
-            user_name = user_name.replace(' ' , '%20' )
+          l = 'http://sulemaan.pythonanywhere.com/'+ user_id + '/' + user_name + '/' + 'download_report_page'
+          r.link = l
+          r.save()
 
-            l = 'http://sulemaan.pythonanywhere.com/'+ user_id + '/' + user_name + '/' + 'download_report_page'
-            r.link = l
-            r.save()
-            pdf.cell(200, 10, txt = "your link to the paid version is :" + l, ln = 1, align = 'L')
-            pdf.cell(200, 10, txt = "" , ln = 1, align = 'L')
+          path = open(personal_user_report, 'rb')
+          mime_type, _ = mimetypes.guess_type(pdf_file_name)
+          response = HttpResponse(path, content_type=mime_type)
+          response['Content-Disposition'] = "attachment; filename=%s" % pdf_file_name
+          return response
+
+          # pdf = FPDF('P', 'mm', (297.18, 420.116))
+          # if pdf : 
+          pdf.add_page()
+          pdf.set_font("Arial", size = 15)
+          pdf.cell(200, 10, txt = "welcome to your report", ln = 1, align = 'C')
+          pdf.cell(200, 10, txt = "thank you for downloading dear , " +  r.user_name, ln = 1, align = 'L')
+          pdf.cell(200, 10, txt = "" , ln = 1, align = 'L')
+          pdf.cell(200, 10, txt = "your phone number is " +  r.user_phone, ln = 1, align = 'L')
+          pdf.cell(200, 10, txt = "your email is " +  r.user_email, ln = 1, align = 'L')
+          user_name = user_name.replace(' ' , '%20' )
+
+          l = 'http://sulemaan.pythonanywhere.com/'+ user_id + '/' + user_name + '/' + 'download_report_page'
+          r.link = l
+          r.save()
+          pdf.cell(200, 10, txt = "your link to the paid version is :" + l, ln = 1, align = 'L')
+          pdf.cell(200, 10, txt = "" , ln = 1, align = 'L')
                 
                 # add another cell
-            pdf.cell(200, 10, txt = "this is the free version", ln = 2, align = 'C')
+          pdf.cell(200, 10, txt = "this is the free version", ln = 2, align = 'C')
 
-            pdf.cell(200, 10, txt = 'according to the affinity group, you are : ' +  r.affinity_result , ln = 2, align = 'L')
-            pdf.cell(200, 10, txt = 'according to the collection of information group, you are : ' + r.collection_result , ln = 2, align = 'L')
-            pdf.cell(200, 10, txt = 'according to the make decision group, you are : ' + r.make_result , ln = 2, align = 'L')
-            pdf.cell(200, 10, txt = 'according to the time spending group, you are : ' + r.time_result , ln = 2, align = 'L')
+          pdf.cell(200, 10, txt = 'according to the affinity group, you are : ' +  r.affinity_result , ln = 2, align = 'L')
+          pdf.cell(200, 10, txt = 'according to the collection of information group, you are : ' + r.collection_result , ln = 2, align = 'L')
+          pdf.cell(200, 10, txt = 'according to the make decision group, you are : ' + r.make_result , ln = 2, align = 'L')
+          pdf.cell(200, 10, txt = 'according to the time spending group, you are : ' + r.time_result , ln = 2, align = 'L')
 
-            pdf.cell(200, 10, txt = 'your code is : ' + r.four_letter_code , ln = 2, align = 'L')
+          pdf.cell(200, 10, txt = 'your code is : ' + r.four_letter_code , ln = 2, align = 'L')
 
         
-          # save the pdf with name .pdf
-          pdf.output(pdf_file_name)
-          pdf = pdf_file_name
+          # # save the pdf with name .pdf
+          # pdf.output(pdf_file_name)
+          # pdf = pdf_file_name
 
 
           # import fitz
           # import pymupdf
-          pdf_skip_first_page = open(personal_user_report, 'rb') 
-          pdf_skip_first_page.delete_page(0)
+          # pdf_skip_first_page = open(personal_user_report, 'rb') 
+          # pdf_skip_first_page.delete_page(0)
           # pdf_skip_first_page.close() 
           
           # merge the new page and the report pdf
-          pdfs = [pdf, pdf_skip_first_page]
-          merger = PdfMerger()
-          for pdf in pdfs:
-              merger.append(pdf)
+          # pdfs = [pdf, pdf_skip_first_page]
+          # merger = PdfMerger()
+          # for pdf in pdfs:
+          #     merger.append(pdf)
 
-          merger.write("result.pdf")
-          merger.close()
+          # merger.write("result.pdf")
+          # merger.close()
 
           # return http response of the pdf file 
-          path = open('result.pdf', 'rb')
-          filename = ""
-          filename = pdf_file_name
-          mime_type, _ = mimetypes.guess_type(pdf_skip_first_page)
-          response = HttpResponse(path, content_type=mime_type)
-          response['Content-Disposition'] = "attachment; filename=%s" % filename
-          return response
+          # path = open('result.pdf', 'rb')
+          # filename = ""
+          # filename = pdf_file_name
+          # mime_type, _ = mimetypes.guess_type(pdf_skip_first_page)
+          # response = HttpResponse(path, content_type=mime_type)
+          # response['Content-Disposition'] = "attachment; filename=%s" % filename
+          # return response
+
+          
 
 def download_report_paid(request , user_id , user_name):
           from django.conf import settings

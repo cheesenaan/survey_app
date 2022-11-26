@@ -67,12 +67,13 @@
         </div>
       </header>
     <br>  <br>  <br> 
-    <h1> يرجى إكمال استطلاع ٦٠ سؤالا </h1>
 </body>
 
 <body> 
 
-<div align="left " id="displaytimer"><b>Timer: 0 seconds</b></div>
+<div class="d-flex flex-column justify-content-center align-items-center">
+    <h1> يرجى إكمال استطلاع ٦٠ سؤالا </h1>
+<div align="centre " id="displaytimer"><b>Timer: 0 seconds</b></div>
 
  <form method='post' action=''">
     {% csrf_token %}    
@@ -80,7 +81,7 @@
     {% for q  in questions%}
     <br>
     <div class="form-group">
-        {{q.id}}).    {{q.question_arabic_سؤال_عربي}}
+       <h5>  {{q.id}}).    {{q.question_arabic_سؤال_عربي}} </h5>
     </div>
     <div class="form-check">
         <div class="form-check">
@@ -138,6 +139,7 @@
         </script>
     {% endblock script %}
 
+</div>
 </div>
 
 </body>
