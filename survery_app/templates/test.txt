@@ -1,1 +1,131 @@
-this is a tex file for testing
+{% extends 'index.html' %}
+
+{% block content %}
+    <br>  <br> <br>  <br> <br>  
+    <head> <title> affinity confirmation </title </head>
+<body> 
+
+
+<section id="confirmation" class="confirmation">
+        <div class="container">
+
+            <div class="d-flex flex-column justify-content-center align-items-center">
+
+                <h4> 25% </h4> <br>
+                <p> Based off the <b> affinity </b> group, you are an :  </p>
+                <h1>  {{affinity_result }} </h1>
+                <br>
+
+                <form method='post' action=''">
+                    {% csrf_token %}
+
+                        <p> If you would like to <b> learn more</b> about the affinity group please click  <b> <a href="#info"> here </a></p> </b>
+                        
+
+                        Do you agree that you are an {{affinity_result }}? If you do not agree please change your answer to {{change_result}}
+
+                        <div class="form-check"> <br>
+                            <input class="form-check-input" type="radio" name="affinity_result" id="gridRadios1" value="option1">
+                                Agree, I am an {{affinity_result }}
+                                <br>
+                            <input class="form-check-input" type="radio" name="affinity_result" id="gridRadios2" value="option2">
+                                Disagree, change my answer to {{change_result}}
+                                
+                        </div> <br>
+                    
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div> 
+</section>
+
+<br> <br> <br> <br> <br> <br>  <br>
+
+<section id="info" class="info">
+    <br>
+    <b> - Introvert</b> : When a person is reserved and does not open up easily <br>
+    <b> - Extrovert </b> : When a person is social, talkative and makes friends quickly
+            
+    <table id="tablep3ress-40" class="tablepress tablepress-id-430">
+                <thead>
+                <tr class="row-1 odd">
+                    <th class="column-1">Basis for Comparison</th><th class="column-2">Introvert</th><th class="column-3">Extrovert</th>
+                </tr><br>
+                </thead>
+                <tbody class="row-hover">
+                <tr class="row-2 even">
+                    <td class="column-1">Meaning</td><td class="column-2">An introvert is a person who remains isolated, or enjoys the company of few closed ones.</td><td class="column-3">An extrovert is an outgoing and outspoken person who enjoys being around and talking to people.</td>
+                </tr><br>
+                <tr class="row-3 odd">
+                    <td class="column-1">Nature</td><td class="column-2">Self-contained</td><td class="column-3">Gregarious</td>
+                </tr><br>
+                <tr class="row-4 even">
+                    <td class="column-1">Speaking</td><td class="column-2">They think before speaking.</td><td class="column-3">They reason things out by speaking them.</td>
+                </tr><br>
+                <tr class="row-5 odd">
+                    <td class="column-1">Energy</td><td class="column-2">Recharges with solitude</td><td class="column-3">Recharges with social interactions</td>
+                </tr><br>
+                <tr class="row-6 even">
+                    <td class="column-1">Time</td><td class="column-2">Spends more time with themselves</td><td class="column-3">Spends more time with family and friends</td>
+                </tr><br>
+                <tr class="row-7 odd">
+                    <td class="column-1">Focus</td><td class="column-2">Inward focused</td><td class="column-3">Outward focused</td>
+                </tr><br>
+                <tr class="row-8 even">
+                    <td class="column-1">Friends</td><td class="column-2">Few</td><td class="column-3">Many</td>
+                </tr><br>
+                <tr class="row-9 odd">
+                    <td class="column-1">Change</td><td class="column-2">Do not accept change easily.</td><td class="column-3">Accept change easily.</td>
+                </tr><br>
+                <tr class="row-10 even">
+                    <td class="column-1">Communication</td><td class="column-2">Openly communicate about themselves with people they know and trust.</td><td class="column-3">Openly communicate about themselves with anyone.</td>
+                </tr><br>
+                <tr class="row-11 odd">
+                    <td class="column-1">Concentration</td><td class="column-2">Deeply concentrate for long period.</td><td class="column-3">Get distracted easily.</td>
+                </tr><br>
+                </tbody>
+    </table>
+</section>
+
+<br> <br>  <br> <br>  <br> 
+
+
+        <!-- ======= Testimonials Section ======= -->
+            <div class="container">
+      
+                <h2>Testimonials</h2>
+                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+      
+              <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+                <div class="swiper-wrapper">
+      
+                  <div class="swiper-slide">
+                    <div class="testimonial-item">
+                      <p>
+                        <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                        Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                        <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                      </p>
+                      <img src="/static/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+                      <h3>Saul Goodman</h3>
+                      <h4>Ceo &amp; Founder</h4>
+                    </div>
+                  </div><!-- End testimonial item -->
+            </div>
+
+
+
+
+</body>
+
+
+</html>
+
+{% endblock %}
+
+
+
+
+
