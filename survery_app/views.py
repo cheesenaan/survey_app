@@ -501,7 +501,8 @@ def download_report_free(request , user_id , user_name):
           pdf = FPDF('P', 'mm', (297.18, 420.116))
           if pdf : 
             pdf.add_page()
-            pdf.image("cover.png", x = 0, y = 0, w = 297.18, h = 420.116)
+            background_image =  str(settings.BASE_DIR) + "/survery_app/PDF/" + str("cover.png")
+            pdf.image(background_image, x = 0, y = 0, w = 297.18, h = 420.116)
             pdf.set_font('Arial', '', 80)  
             pdf.cell(200, 10, r.four_letter_code , ln = 2, align = 'L')
             pdf.ln(10)
@@ -607,7 +608,8 @@ def download_report_paid(request , user_id , user_name):
       pdf = FPDF('P', 'mm', (297.18, 420.116))
       if pdf : 
         pdf.add_page()
-        pdf.image("cover.png", x = 0, y = 0, w = 297.18, h = 420.116)
+        background_image =  str(settings.BASE_DIR) + "/survery_app/PDF/" + str("cover.png")
+        pdf.image(background_image, x = 0, y = 0, w = 297.18, h = 420.116)
         pdf.set_font('Arial', '', 80)  
         pdf.cell(200, 10, r.four_letter_code , ln = 2, align = 'L')
         pdf.ln(10)
@@ -702,7 +704,8 @@ def download_receipt(request , user_id , user_name):
       pdf = FPDF('P', 'mm', (297.18, 420.116))
       if pdf : 
         pdf.add_page()
-        pdf.image("cover.png", x = 0, y = 0, w = 297.18, h = 420.116)
+        background_image =  str(settings.BASE_DIR) + "/survery_app/PDF/" + str("cover.png")
+        pdf.image(background_image, x = 0, y = 0, w = 297.18, h = 420.116)
         pdf.set_font('Arial', '', 80)  
         pdf.cell(200, 10, r.four_letter_code , ln = 2, align = 'L')
         pdf.ln(10)
