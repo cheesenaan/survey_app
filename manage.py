@@ -3,7 +3,7 @@
 import os
 import sys
 
-
+# here is something
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'survery_project.settings')
