@@ -24,5 +24,7 @@ urlpatterns=[
   path('<str:user_id>/<str:user_name>/no_coupon', views.no_coupon, name='no_coupon'),
   path('<str:user_id>/<str:user_name>/coupon', views.coupon, name='coupon'),
 
+  path('<str:user_id>/<str:user_name>/download_receipt', views.download_receipt, name='download_receipt'),
+
   path('RIASEC_survey_arabic', views.RIASEC_survey_arabic, name='RIASEC_survey_arabic'),
 ]

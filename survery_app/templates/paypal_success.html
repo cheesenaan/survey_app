@@ -1,16 +1,33 @@
-{% load static %}
-
-<head> 
-    <link href="static/css/style.css" rel="stylesheet">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-</head>
-
-<h1> paypal_success </h1>
 
 
-<p> Congratulations. You have made your purchase. Here is your paid report. </p>
+{% extends 'index.html' %}
 
-<form method='post' action='download_report_paid'">
-    {% csrf_token %}    
-    <button type="submit" class="btn btn-primary">Download paid verison</button>
-</form>
+{% block content %}
+    <br>  <br> <br>  <br> <br>  
+    <head> <title> paypal success </title </head>
+<body> 
+
+    <h1> Your Transaction has been completed </h1>
+
+        <p> Congratulations. Thank you for your purchase. Here is your paid report. </p>
+        <br> 
+        <p> Download your receipt</p>
+        <form method='post' action='download_receipt'">
+            {% csrf_token %}    
+            <button type="submit" class="btn btn-primary">receipt </button>
+        </form>
+
+        <br>
+        <p> Click here to send the receipt to your email TODO </p>
+
+        <br>
+        <form method='post' action='download_report_paid'">
+            {% csrf_token %}    
+            <button type="submit" class="btn btn-primary">Download the premium version </button>
+        </form>
+
+</body>
+
+
+{% endblock %}
+

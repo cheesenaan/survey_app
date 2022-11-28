@@ -20,7 +20,7 @@
                 <form method='post' action=''">
                     {% csrf_token %}    
 
-                        <p> If you would like to learn more about the collection group please click  <a href="about"> here </a></p>
+                        <p> If you would like to learn more about the collection group please visit the home page or click  <a href="about"> here </a></p>
                         
 
                         Do you agree that you are an {{collection_result }}? If you do not agree please change your answer to {{change_result}}
@@ -45,12 +45,46 @@
 <br> <br> <br> <br> <br> <br>  <br>
 
     <section id="info" class="info">
-        <div class="d-flex flex-column justify-content-center align-items-center">
-        <br>
-        <p> <b> - Introvert</b> : When a person is reserved and does not open up easily <br> </p>
-        <p> <b> - Extrovert </b> : When a person is social, talkative and makes friends quickly </p>
-        </div>
+
+        <li>  <b>  Sensing</b> : When a person is reserved and does not open up easily <br>  </li>
+        <li>   <b>  Intuition </b> : When a person is social, talkative and makes friends quickly  </li>
+        <li>   <b>  Example </b> : I can only collect information when I detect or sense something through the 5 senses. I cannot collect information intuitively, ie without seeing, hearing, tasting, feeling or touching something. Therefore, my collection of information group is Sensing and is not Intuition.   </li>
                 
+        <br>
+
+        <div class="d-flex flex-column justify-content-center align-items-center">
+            <p> For all examples, Click <a href="/#testimonials" target="_blank" > here </a> </p>
+            <p> Not sure what are the differences? read below and , Click  <a href="/#services" target="_blank" > here </a> </p>
+        </div>
+        <br>
+
+
+        <p>
+            We are Sensing when we:
+        </p>
+
+        <li> Taste food </li>
+        <li> Notice a stoplight has changed </li>
+        <li> Memorize a speech </li>
+        <li> Follow steps in a plan </li>
+        
+        <br>
+
+        <p>
+            We are introverting when we:
+        </p>
+
+        <li> Come up with a new way of doing things </li>
+        <li> Think about future implications for a current action  </li>
+        <li> Perceive underlying meaning in what people say or do        </li>
+        <li> See the big picture </li>
+        
+        <br>
+        <p>
+            Do you rely on your five senses and want concrete, practical data to work with? Or do you trust your intuitions without necessarily building upon a solid foundation of facts?
+        </p>
+
+
         <table id="tablep3ress-40" class="t">
             <style>
                 .t{
@@ -71,41 +105,34 @@
             </style>
                     <thead>
                     <tr class="row-1 odd">
-                        <th class="column-1">Basis for Comparison</th><th class="column-2">Introvert</th><th class="column-3">Extrovert</th>
+                        <th class="column-1">Basis for Comparison</th><th class="column-2">Sensing</th><th class="column-3">Intuition</th>
                     </tr><br>
                     </thead>
 
+                    <!-- https://www.psychologyjunkie.com/2015/08/12/are-you-a-sensor-or-an-intuitive-how-to-find-out/ -->
+
                     <tbody class="row-hover">
                     <tr class="row-2 even">
-                        <td class="column-1">Meaning</td><td class="column-2">An introvert is a person who remains isolated, or enjoys the company of few closed ones.</td><td class="column-3">An extrovert is an outgoing and outspoken person who enjoys being around and talking to people.</td>
+                        <td class="column-1">Focus</td><td class="column-2"> Sensors focus more on the present (today, this week) or the past than the future. </td><td class="column-3"> Intuitives focus more on the future than the present or the past. </td>
                     </tr><br>
                     <tr class="row-3 odd">
-                        <td class="column-1">Nature</td><td class="column-2">Self-contained</td><td class="column-3">Gregarious</td>
+                        <td class="column-1">Tendency</td><td class="column-2">Sensors tend to be practical and down-to-earth</td><td class="column-3">Intuitives tend to be imaginative and innovative</td>
                     </tr><br>
                     <tr class="row-4 even">
-                        <td class="column-1">Speaking</td><td class="column-2">They think before speaking.</td><td class="column-3">They reason things out by speaking them.</td>
+                        <td class="column-1">Speaking</td><td class="column-2">Sensors prefer to talk about what is happening or what has happened. They are more concerned with the details and will have more descriptive or literal details in their conversation.</td><td class="column-3"> Intuitives prefer to talk about what things “mean” or symbolize. They are more concerned with the overall big picture and can gloss over a lot of the sensory details</td>
                     </tr><br>
                     <tr class="row-5 odd">
-                        <td class="column-1">Energy</td><td class="column-2">Recharges with solitude</td><td class="column-3">Recharges with social interactions</td>
+                        <td class="column-1">Speaking</td><td class="column-2">Sensors prefer to speak literally</td><td class="column-3">Intuitives prefer to speak metaphorically</td>
                     </tr><br>
                     <tr class="row-6 even">
-                        <td class="column-1">Time</td><td class="column-2">Spends more time with themselves</td><td class="column-3">Spends more time with family and friends</td>
+                        <td class="column-1">Boredom</td><td class="column-2">Sensors will get bored more quickly talking about theoretical or abstract concepts</td><td class="column-3">Intuitives will get bored more quickly talking about day-to-day, practical topics</td>
                     </tr><br>
                     <tr class="row-7 odd">
-                        <td class="column-1">Focus</td><td class="column-2">Inward focused</td><td class="column-3">Outward focused</td>
+                        <td class="column-1">do</td><td class="column-2">Sensors like to “do” things. They aren’t likely to sit and just think or daydream. They’re more likely to be working on a project, playing a game, watching a movie, cleaning, building, always “doing”</td><td class="column-3">Intuitives like to analyze. They want to think, reflect, study, experiment, innovate. They can be action-oriented, but that action almost always lines up with their future-oriented vision</td>
                     </tr><br>
                     <tr class="row-8 even">
-                        <td class="column-1">Friends</td><td class="column-2">Few</td><td class="column-3">Many</td>
-                    </tr><br>
-                    <tr class="row-9 odd">
-                        <td class="column-1">Change</td><td class="column-2">Do not accept change easily.</td><td class="column-3">Accept change easily.</td>
-                    </tr><br>
-                    <tr class="row-10 even">
-                        <td class="column-1">Communication</td><td class="column-2">Openly communicate about themselves with people they know and trust.</td><td class="column-3">Openly communicate about themselves with anyone.</td>
-                    </tr><br>
-                    <tr class="row-11 odd">
-                        <td class="column-1">Concentration</td><td class="column-2">Deeply concentrate for long period.</td><td class="column-3">Get distracted easily.</td>
-                    </tr><br>
+                        <td class="column-1">Think</td><td class="column-2">Sensors tend to think, speak, and do things in a linear fashion. A leads to B which leads to C.</td><td class="column-3">Intuitives like to start a story or project with the “big picture” in mind and then fill in with details as necessary</td>
+
                     </tbody>
         </table>
 

@@ -13,9 +13,16 @@
             <div class="d-flex flex-column justify-content-center align-items-center">
                 
                 <br> <br> <br><br> <br> 
+
+                <form method='post' action='no_coupon'">
+                    {% csrf_token %}    
+                    <!-- <button type="submit" class="no_coupon"> I do not have a coupon </button> -->
+                    <button type="submit" class="btn btn-primary"> I do not have a coupon </button>
+                </form>   <br>  <br> 
+
                 {{ message }}
                 <p> If you have a coupon, you can enter it to get a discount </p>
-                <p> If you want to check the value and/or limit of the coupon, please click here </p>
+                <p> If you want to check the value and/or limit of the coupon, please click here TODO </p>
                 <p> Learn more about coupon</p>
 
 
@@ -31,11 +38,7 @@
             
                 
             
-                <form method='post' action='no_coupon'">
-                    {% csrf_token %}    
-                    <!-- <button type="submit" class="no_coupon"> I do not have a coupon </button> -->
-                    <button type="submit" class="btn btn-primary"> I do not have a coupon </button>
-                </form>  
+                
             
                 
             </div>

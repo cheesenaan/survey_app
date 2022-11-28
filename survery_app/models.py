@@ -134,6 +134,7 @@ class RIASEC(models.Model):
 # that would be the link #
 
 class report_purchase_successful(models.Model):
+    id_result_reference = models.BigIntegerField()
     four_letter_code  = models.CharField(max_length=500)
     user_name = models.CharField(max_length=500)
     user_email = models.CharField(max_length=500)
@@ -155,7 +156,7 @@ class coupon(models.Model):
 
 # model of who downloaded
 class free_download(models.Model):
-    result_id = models.BigIntegerField()
+    result_id = models.BigIntegerField(default=0)
     user_name = models.CharField(max_length=500)
     user_email = models.CharField(max_length=500)
     link = models.CharField(max_length=500)

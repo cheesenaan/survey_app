@@ -1,32 +1,28 @@
-{% load static %}
-
-<head> 
-    <link href="static/css/style.css" rel="stylesheet">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-</head>
 
 
-<header id="header" class="fixed-top d-flex align-items-center">
-    <div class="container d-flex justify-content-between">
+<br>  <br> <br> <br> <br> 
 
-      <div class="logo">
-        <h1><a href="index.html">استبيان</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html"><img src="static/img/logo.png" alt="" class="img-fluid"></a>-->
-      </div>
+{% extends 'index.html' %}
 
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
+{% block content %}
+    <head> <title> error   </title </head>
+<body> 
+
+    <div class="d-flex flex-column justify-content-center align-items-center"></div>
+        <h1> please go back and make sure that:</h1>
+        <li> you completed all the questions </li>
+        <li> you have typed your name </li>
+        <li> you have typed your email</li>
+
+        <br>
+
+        <h1> :يرجى العودة والتأكد من ذلك </h1>
+        <li> لقد أكملت جميع الأسئلة </li>
+        <li> لقد كتبت اسمك </li>
+        <li> لقد كتبت بريدك الإلكتروني </li>
+
 
     </div>
-  </header>
-<br>  <br>  <br> 
+</body>
 
-<h1> please make sure that you have typed your name and email </h1>
-
-<h1> يرجى التأكد من كتابة اسمك والبريد الإلكتروني </h1>
+{% endblock %}
