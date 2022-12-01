@@ -1,6 +1,3 @@
-push code from vscode django to github repo
-
-
 git add .                   
 git commit -m 'First commit'
 git remote add origin https://github.com/cheesenaan/fifa.git
