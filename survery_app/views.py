@@ -545,30 +545,6 @@ def download_report_free(request , user_id , user_name):
             pdf.set_font('Arial','B' ,15)  
             pdf.cell(200, 10, txt = r.link  , ln = 2, align = 'L')
 
-          if pdf:
-              # Open the PDF file in read-binary mode
-              with open(personal_user_report, 'rb') as file:
-                # Create a PDF object
-                p = PyPDF2.PdfFileReader(file)
-
-                # Get the page you want to copy
-                page = p.getPage(5)
-
-                # Create a new PDF object
-                new_pdf = PyPDF2.PdfFileWriter()
-
-                # Add the page to the new PDF
-                new_pdf.addPage(page)
-
-                # Add your text to the page
-                page.mergePage(page)
-                new_pdf.write(5, f"Your personal link to the full premium version")
-                new_pdf.addPage(page)
-
-
-                p.getPage(5).mergePage(new_pdf)
-
-
 
           # # save the pdf with name .pdf
           pdf.output("page.pdf" , 'F')
