@@ -16,10 +16,11 @@ from fpdf import FPDF
 from django.shortcuts import redirect
 import datetime
 
+import jinja2
+
 # Create your views here.
 def home(request):
   return render(request, "home.html")
-
 
 
 def survey_arabic(request):
@@ -64,7 +65,10 @@ def survey_arabic(request):
         time_2_heading = ""
 
         # get user response from form.
+        missing_questions = []
+
         for q in questions:
+
             if   request.POST.get(q.question_arabic_سؤال_عربي) == 'option1':
               if q.group_مجموعة == 'Affinity':    
                 affinity_1 = affinity_1 + q.rank_النقاط
@@ -98,10 +102,21 @@ def survey_arabic(request):
               if q.group_مجموعة == 'Time spending':    
                 time_2 = time_2 + q.rank_النقاط
                 time_2_heading = q.title_of_answer_choice_two_عنوان_الإجابة_الثاني
-              
-            if   request.POST.get(q.question_arabic_سؤال_عربي) == None:
-              return render(request,'incomplete_survey.html')
             
+            if   request.POST.get(q.question_arabic_سؤال_عربي) == None:
+              missing_questions.append(q)
+            
+        print(missing_questions)
+
+        if len(missing_questions) > 0:
+           
+           j = '#' + str(missing_questions[0].id)
+           context = {
+            'missing_questions':missing_questions ,
+            'jump' : j ,
+            'length' : str(len(missing_questions))
+           } 
+           return render(request , 'incomplete_survey.html', context)
 
 
         affinity_result = ""
@@ -206,11 +221,9 @@ def survey_arabic(request):
 
         }
 
-        # render confirmation page
-        # l = r.user_name + '/' + 'arabic_confirmation'
-        # return redirect(l)
-        # return redirect('arabic_confirmation')
         return redirect('arabic_confirmation' , r_id , r.user_name)
+        
+          
 
 
     else:
@@ -532,6 +545,31 @@ def download_report_free(request , user_id , user_name):
             pdf.set_font('Arial','B' ,15)  
             pdf.cell(200, 10, txt = r.link  , ln = 2, align = 'L')
 
+          if pdf:
+              # Open the PDF file in read-binary mode
+              with open(personal_user_report, 'rb') as file:
+                # Create a PDF object
+                p = PyPDF2.PdfFileReader(file)
+
+                # Get the page you want to copy
+                page = p.getPage(5)
+
+                # Create a new PDF object
+                new_pdf = PyPDF2.PdfFileWriter()
+
+                # Add the page to the new PDF
+                new_pdf.addPage(page)
+
+                # Add your text to the page
+                page.mergePage(page)
+                new_pdf.write(5, f"Your personal link to the full premium version")
+                new_pdf.addPage(page)
+
+
+                p.getPage(5).mergePage(new_pdf)
+
+
+
           # # save the pdf with name .pdf
           pdf.output("page.pdf" , 'F')
 
@@ -751,8 +789,6 @@ def download_receipt(request , user_id , user_name):
       response['Content-Disposition'] = "attachment; filename=%s" % r.user_name + "_" + r.four_letter_code + "_" + "receipt.pdf"
       return response
 
-
-      
 
 def paypal(request):
     return render(request, "paypal.html")

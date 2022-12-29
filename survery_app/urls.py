@@ -7,6 +7,7 @@ urlpatterns=[
   path('',views.home),
   
   path('survey_arabic', views.survey_arabic, name='survey_arabic'),
+  path('survey_arabic<str:link>', views.survey_arabic, name='survey_arabic'),
   path('survey_english', views.survey_english, name='survey_english'),
 
   path('<str:user_id>/<str:user_name>/arabic_confirmation', views.arabic_confirmation, name='arabic_confirmation'),

@@ -6,14 +6,45 @@
 
 {% block content %}
     <br>  <br> <br>  <br> <br>  
-    <head> <title> incomplete survey</title </head>
+    <head> <title> ارجع وأكمل</title </head>
 <body> 
 
-  <h1> you must complete the survey. please go back </h1>
 
-  <h1> يجب عليك إكمال الاستبيان. من فضلك ارجع </h1>
-</body>
+  <button onclick="navigateBack()">Go Back</button>
 
+  <br> <br>
+
+  <script>
+
+    function navigateBack() {
+      history.back();
+      history.pushState(null, null, '#20');
+    }
+
+
+  </script>
+
+
+  <h3> you are missing {{length}} questions </h3>
+  <h1> تفتقد {{length}} من الأسئلة </h1>
+  <br>
+
+  <table>
+    <tr>
+        <th>#</th>
+        <th>question</th>
+    </tr>
+    {% for item in missing_questions %}
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{item.question_arabic_سؤال_عربي}}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+  <br> <br>
 
 {% endblock %}
+
+
 

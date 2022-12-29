@@ -23,7 +23,7 @@
                         <form method='post' action=''">
                             {% csrf_token %}    
 
-                                <p> If you would like to learn more about the time spending group please click  <a href="about"> here </a></p>
+                                <p> If you would like to learn more about the time spending group please click  <a href="#info"> here </a></p>
                                 
 
                                 Do you agree that you are an {{time_result }}? If you do not agree please change your answer to {{change_result}}
@@ -133,6 +133,10 @@
         </section> <br> <br>  <br> <br>  <br> 
 
     </body>
+
+    <script>
+        window.location = "arabic_4_confirmation" 
+    </script>
 
 
 </html>
