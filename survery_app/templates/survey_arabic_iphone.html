@@ -1,7 +1,4 @@
-
-
-
-{% extends 'index.html' %}
+<!-- {% extends 'index.html' %}
 
 {% block content %}
     <br>  <br> <br> 
@@ -22,7 +19,28 @@
 
     {% for q  in questions%}
 
+    <style>
+        
+        /* section { */
+        /* height: 100; */
+        /* background: whitesmoke; */
+        /* border: 2px solid black; */
+        /* } */
+
+        nav-link js-scroll-trigger{
+            padding-top: 40px;
+        }
+
+        before_submit{
+            padding-top: 40px;
+        }
+
+    </style>
+        {% if  forloop.first %}
+
+        {% endif %}
         <section id={{q.id}}> 
+            <br><br><br><br><br><br><br><br><br>
             <div class="form-group">
             <h5>  {{q.id}}).    {{q.question_arabic_سؤال_عربي}} </h5>
             </div>
@@ -39,6 +57,26 @@
             </div>
         </section>   
 
+        {{q.id}} / 60
+          
+        <br>  <br> <br>
+
+        
+        {% if not forloop.last %}
+            <a class="nav-link js-scroll-trigger" href="#{{forloop.counter|add:"1"}}">Next</a>
+        {% endif %}
+
+        {% if forloop.last %}
+        <a class="nav-link js-scroll-trigger" href="#before_submit">submit</a>
+        
+        {% endif %}
+
+
+
+        
+
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        
     {% endfor %}
 
     
@@ -102,4 +140,6 @@
  
 </html>
 
-{% endblock %}
+{% endblock %} -->
+
+
