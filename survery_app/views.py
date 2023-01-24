@@ -504,11 +504,13 @@ def download_report_free(request , user_id , user_name):
           r.link = l
           r.save()
 
-          path = open(personal_user_report, 'rb')
           # mime_type, _ = mimetypes.guess_type(pdf_file_name)
           # response = HttpResponse(path, content_type=mime_type)
           # response['Content-Disposition'] = "attachment; filename=%s" % pdf_file_name
           # return response
+          import PyPDF2
+          
+          path = open(personal_user_report, 'rb')
 
           from fpdf import FPDF
           pdf = FPDF('P', 'mm', (297.18, 420.116))
@@ -544,7 +546,6 @@ def download_report_free(request , user_id , user_name):
             pdf.ln(10)
             pdf.set_font('Arial','B' ,15)  
             pdf.cell(200, 10, txt = r.link  , ln = 2, align = 'L')
-
 
           # # save the pdf with name .pdf
           pdf.output("page.pdf" , 'F')
@@ -583,6 +584,9 @@ def download_report_free(request , user_id , user_name):
           mime_type, _ = mimetypes.guess_type(personal_user_report)
           response = HttpResponse(path, content_type=mime_type)
           response['Content-Disposition'] = "attachment; filename=%s" % pdf_file_name
+
+
+          
 
           #delete page.pdf and result.pdf to save space on pythonanywhere
           

@@ -1,6 +1,3 @@
-
-
-
 {% extends 'index.html' %}
 
 {% block content %}
@@ -11,7 +8,7 @@
 <body> 
 
 <div class="d-flex flex-column justify-content-center align-items-center">
-    <h1> يرجى إكمال استطلاع ٦٠ سؤالا </h1>
+
 <div align="centre " id="displaytimer"><b>Timer: 0 seconds</b></div>
 
 
@@ -21,8 +18,31 @@
     {% csrf_token %}    
 
     {% for q  in questions%}
+    
 
+
+    <style>
+        
+        /* section { */
+        /* height: 100; */
+        /* background: whitesmoke; */
+        /* border: 2px solid black; */
+        /* } */
+
+        nav-link js-scroll-trigger{
+            padding-top: 40px;
+        }
+
+        before_submit{
+            padding-top: 40px;
+        }
+
+    </style>
+        {% if  forloop.first %}
+
+        {% endif %}
         <section id={{q.id}}> 
+            <br><br><br><br><br><br><br><br><br>
             <div class="form-group">
             <h5>  {{q.id}}).    {{q.question_arabic_سؤال_عربي}} </h5>
             </div>
@@ -39,6 +59,27 @@
             </div>
         </section>   
 
+        {{q.id}} / 60
+          
+        <br>  <br> <br>
+
+        
+        {% if not forloop.last %}
+            <a class="nav-link js-scroll-trigger" href="#{{forloop.counter|add:"1"}}">Next</a>
+        {% endif %}
+
+        {% if forloop.last %}
+        <a class="nav-link js-scroll-trigger" href="#before_submit">submit</a>
+
+        
+        {% endif %}
+
+
+
+        
+
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        
     {% endfor %}
 
     
