@@ -11,72 +11,64 @@
 
 <div align="centre " id="displaytimer"><b>Timer: 0 seconds</b></div>
 
-
-
-
  <form method='post' action=''">
     {% csrf_token %}    
-
     {% for q  in questions%}
-    
+        <style>
+            
+            /* section { */
+            /* height: 100; */
+            /* background: whitesmoke; */
+            /* border: 2px solid black; */
+            /* } */
 
+            nav-link js-scroll-trigger{
+                padding-top: 40px;
+            }
 
-    <style>
-        
-        /* section { */
-        /* height: 100; */
-        /* background: whitesmoke; */
-        /* border: 2px solid black; */
-        /* } */
+            before_submit{
+                padding-top: 40px;
+            }
 
-        nav-link js-scroll-trigger{
-            padding-top: 40px;
-        }
-
-        before_submit{
-            padding-top: 40px;
-        }
-
-    </style>
+        </style>
         {% if  forloop.first %}
 
         {% endif %}
+
         <section id={{q.id}}> 
             <br><br><br><br><br><br><br><br><br>
             <div class="form-group">
-            <h5>  {{q.id}}).    {{q.question_arabic_سؤال_عربي}} </h5>
+                <h5>  {{q.id}}).    {{q.question_arabic_سؤال_عربي}} </h5>
             </div>
             <div class="form-check">
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="{{q.question_arabic_سؤال_عربي}}" id="gridRadios1" value="option1">
-                        {{q.asnwer_choice_one_arabic_الإجابة_الأولى_عربى}}
-                        <br>
-                    <input class="form-check-input" type="radio" name="{{q.question_arabic_سؤال_عربي}}" id="gridRadios2" value="option2">
-                        {{q.asnwer_choice_two_arabic_الإجابة_الثاني_عربى}}
-                        
+                    <input class="form-check-input" type="radio" name="{{q.question_arabic_سؤال_عربي}}" id="gridRadios1" value="option1" onclick="nextQuestion({{forloop.counter|add:"1"}})">
+                    {{q.asnwer_choice_one_arabic_الإجابة_الأولى_عربى}}
+                    <br>
+                    <input class="form-check-input" type="radio" name="{{q.question_arabic_سؤال_عربي}}" id="gridRadios2" value="option2" onclick="nextQuestion({{forloop.counter|add:"1"}})">
+                    {{q.asnwer_choice_two_arabic_الإجابة_الثاني_عربى}}
                 </div>
                 <br>
             </div>
         </section>   
-
-        {{q.id}} / 60
-          
+        
+        <!-- {{q.id}} / 60 -->
+        
         <br>  <br> <br>
-
+        
         
         {% if not forloop.last %}
-            <a class="nav-link js-scroll-trigger" href="#{{forloop.counter|add:"1"}}">Next</a>
+            <script>
+            function nextQuestion(nextID) {
+                window.location.href = "#"+nextID;
+            }
+            </script>
+            <!-- <a class="nav-link js-scroll-trigger" href="#{{forloop.counter|add:"1"}}">Next</a> -->
         {% endif %}
 
         {% if forloop.last %}
-        <a class="nav-link js-scroll-trigger" href="#before_submit">submit</a>
-
-        
+            <a class="nav-link js-scroll-trigger" href="#before_submit">submit</a>
         {% endif %}
-
-
-
-        
 
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         
@@ -106,11 +98,7 @@
         <br>
 
         <button type="submit"> Submit</button>
-        <script>
-            document.getElementById('submit').addEventListener('click', function() {
-                alert("hello")
-                window.history.replace('');
-          });
+        
         </script>
           
     </section>

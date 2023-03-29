@@ -22,7 +22,6 @@ import jinja2
 def home(request):
   return render(request, "home.html")
 
-
 def survey_arabic(request):
     if request.method == 'POST':
         #print(request.POST)
@@ -497,12 +496,18 @@ def download_report_free(request , user_id , user_name):
           filename = r.pdf_free
 
           # report file name fromm 16 reports
-          personal_user_report =  str(settings.BASE_DIR) + "/survery_app/PDF/" + str(filename)
-          pdf_file_name = str(user_id) + "_" + user_name + "_" + r.four_letter_code + '.pdf'
+          import re
+          user_name = re.sub(' ', '%', user_name)
+
 
           l = 'http://sulemaan.pythonanywhere.com/'+ user_id + '/' + user_name + '/' + 'download_report_page'
           r.link = l
           r.save()
+
+          pdf_file_name = str(user_id) + "_" + user_name + "_" + r.four_letter_code + '.pdf'
+          personal_user_report =  str(settings.BASE_DIR) + "/survery_app/PDF/" + str(filename)
+
+
 
           # mime_type, _ = mimetypes.guess_type(pdf_file_name)
           # response = HttpResponse(path, content_type=mime_type)
@@ -608,6 +613,9 @@ def download_report_paid(request , user_id , user_name):
                   print("found")
                   user_result = x
 
+
+      import re
+      user_name = re.sub(' ', '%', user_name)
       r = user_result
       filename = r.pdf_paid
 
@@ -739,11 +747,11 @@ def download_receipt(request , user_id , user_name):
 
         pdf.set_font('Arial', '', 50)  
         pdf.ln(50)
-        pdf.write(5, f"Rreceipt")
+        pdf.write(5, f"receipt")
         pdf.ln(15)
-        pdf.set_font('Arial', '', 40)
+        pdf.set_font('Arial', '', 20)
         pdf.write(5, "Thank you for your purchase,  " + r.user_name)
-        pdf.ln(10)
+        pdf.ln(30)
 
 
         # pdf.write(5, "date of purchase,  " + r.user_name)
@@ -1083,5 +1091,6 @@ def survey_english(request):
             'questions':questions
         }
         return render(request,'survey_english.html',context)
+
 
 
