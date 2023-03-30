@@ -140,6 +140,7 @@ class report_purchase_successful(models.Model):
     user_email = models.CharField(max_length=500)
     user_phone = models.CharField(max_length=500)
     date_and_time_of_purchase = models.DateTimeField()
+    success_code = models.BigIntegerField(default=0)
 
 
 

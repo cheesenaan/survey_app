@@ -823,54 +823,51 @@ def paypal_success(request , user_id , user_name):
   #r = result.objects.latest('id')
 
   if request.method == 'GET':
-    import re
-    name = re.sub(' ', '%', user_name)
+        
+        if not report_purchase_successful.objects.filter(id_result_reference=user_id).exists():
+              import re
+              name = re.sub(' ', '%', user_name)
 
-    l = 'http://sulemaan.pythonanywhere.com/'+ user_id + '/' + name + '/' + 'download_report_page'
-    
+              l = 'http://sulemaan.pythonanywhere.com/'+ user_id + '/' + name + '/' + 'download_report_page'
+              marketers_list = marketers.objects.all()
+              for marketer in marketers_list:
+                  if l in marketer.link:
+                        marketer.number_of_payments += 1
+                        #marketer.amount_earned = 
+                        if marketer.number_of_payments <= 10:
+                              marketer.amount_earned = 0.3 * 9.99 * marketer.number_of_payments
+                        elif marketer.number_of_paid_downloads <= 100:
+                              tier1 = 0.3 * 9.99 * (marketer.number_of_payments - (marketer.number_of_payments - 10)) #10
+                              tier2 = 0.5 * 9.99 * (marketer.number_of_payments - 10) #remaining
+                              marketer.amount_earned = tier1 + tier2
+                        else:
+                              tier1 = 0.3 * 9.99 * (marketer.number_of_payments - (marketer.number_of_payments - 10)) #10
+                              tier2 = 0.5 * 9.99 * (marketer.number_of_payments - (marketer.number_of_payments - 100)) #100
+                              tier3 = 0.75 * 9.99 * (marketer.number_of_payments - 100)
+                              marketer.amount_earned = tier1 + tier2 + tier3
+                        marketer.save()
 
-        # Get all marketers
-    marketers_list = marketers.objects.all()
+        r = result.objects.all()
+        print(user_id)
+        for x in r:
+              print(x.id)
+              print()
+              if str(x.id) == str(user_id):
+                    print("found")
+                    r = x
 
-              # Check if the link is found in any marketer's reports
-    for marketer in marketers_list:
-        if l in marketer.link:
-              marketer.number_of_payments += 1
-              #marketer.amount_earned = 
-              if marketer.number_of_payments <= 10:
-                    marketer.amount_earned = 0.3 * 9.99 * marketer.number_of_payments
-              elif marketer.number_of_paid_downloads <= 100:
-                    tier1 = 0.3 * 9.99 * (marketer.number_of_payments - (marketer.number_of_payments - 10)) #10
-                    tier2 = 0.5 * 9.99 * (marketer.number_of_payments - 10) #remaining
-                    marketer.amount_earned = tier1 + tier2
-              else:
-                    tier1 = 0.3 * 9.99 * (marketer.number_of_payments - (marketer.number_of_payments - 10)) #10
-                    tier2 = 0.5 * 9.99 * (marketer.number_of_payments - (marketer.number_of_payments - 100)) #100
-                    tier3 = 0.75 * 9.99 * (marketer.number_of_payments - 100)
-                    marketer.amount_earned = tier1 + tier2 + tier3
-              marketer.save()
+        x = report_purchase_successful(
+                id_result_reference = user_id,
+                four_letter_code = r.four_letter_code,
+                user_name = r.user_name ,
+                user_email = r.user_email,
+                user_phone = r.user_phone,
+                date_and_time_of_purchase = datetime.datetime.now(),
+                success_code = 1,
+                )
+        x.save()
 
-    r = result.objects.all()
-    print(user_id)
-    for x in r:
-          print(x.id)
-          print()
-          if str(x.id) == str(user_id):
-                print("found")
-                r = x
-
-    x = report_purchase_successful(
-            id_result_reference = user_id,
-            four_letter_code = r.four_letter_code,
-            user_name = r.user_name ,
-            user_email = r.user_email,
-            user_phone = r.user_phone,
-            date_and_time_of_purchase = datetime.datetime.now()
-            )
-    x.save()
-
-
-    return render(request, "paypal_success.html")
+        return render(request, "paypal_success.html")
 
 def c(request , user_id , user_name):
     return redirect('coupon' , user_id , user_name)
