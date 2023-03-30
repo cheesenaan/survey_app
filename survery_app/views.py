@@ -1237,5 +1237,3 @@ def survey_english(request):
         }
         return render(request,'survey_english.html',context)
 
-
-
