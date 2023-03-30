@@ -11,25 +11,14 @@
 
 <div align="centre " id="displaytimer"><b>Timer: 0 seconds</b></div>
 
+
  <form method='post' action=''">
     {% csrf_token %}    
     {% for q  in questions%}
         <style>
-            
-            /* section { */
-            /* height: 100; */
-            /* background: whitesmoke; */
-            /* border: 2px solid black; */
-            /* } */
-
             nav-link js-scroll-trigger{
                 padding-top: 40px;
             }
-
-            before_submit{
-                padding-top: 40px;
-            }
-
         </style>
         {% if  forloop.first %}
 

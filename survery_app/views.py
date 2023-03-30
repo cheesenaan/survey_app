@@ -42,6 +42,7 @@ def survey_arabic(request):
             return render(request, "user_email_error.html")
 
         user_name = request.POST.get("user_name")
+        user_name = user_name.strip()
         user_email = request.POST.get("user_email")
         user_phone = request.POST.get("user_phone")
 
