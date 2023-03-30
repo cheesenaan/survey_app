@@ -168,3 +168,24 @@ class paid_download(models.Model):
     user_name = models.CharField(max_length=500)
     user_email = models.CharField(max_length=500)
     link = models.CharField(max_length=500)
+
+
+class marketers(models.Model):
+    member_id = models.BigIntegerField(primary_key=True)
+    user_name = models.CharField(max_length=500)
+    link = models.CharField(max_length=500)
+    user_email = models.CharField(max_length=500)
+    paypal_email = models.CharField(max_length=500)
+    password = models.CharField(max_length=500)
+
+    number_of_visits = models.BigIntegerField(default=0)
+    number_of_free_downloads = models.BigIntegerField(default=0)
+    number_of_receipt_downloads = models.BigIntegerField(default=0)
+    number_of_payments = models.BigIntegerField(default=0)
+    number_of_paid_downloads = models.BigIntegerField(default=0)
+
+    amount_earned = models.FloatField(default=0)
+
+
+
+

@@ -12,35 +12,35 @@
 
             <div class="d-flex flex-column justify-content-center align-items-center">
                 
-                <p> Please choose a report to download. </p> <br> 
+                <p> Not sure which editon to download? Click <a href="/#faq" target="_blank" > here </a> to see the FAQ </p> <br>
 
 
-                <h3> Standard edition </h3> 
-                <p> Your personal link to the paid version will be in the standard edition pdf</p>
-                    
+                <h3> Standard edition </h3>                     
                 <form method='post' action='download_report_free'">
                     {% csrf_token %}    
                     <button type="submit" class="btn btn-primary">Download</button>
-                </form>   <br> <br>  <br> <br> <br> 
+                </form>   <br> <br>  <br> 
                 
-                
-                
-                <h3> Download the premium edition </h3>
+                <h3> Premium edition </h3>
                 <form method='post' action='c'">
                     {% csrf_token %}    
                     <button type="submit" class="btn btn-primary"> Download </button>
+                </form><br> <br>  <br> 
+
+                <h3> Earn Money </h3>
+                <p> Become an affiliate marketer</p>
+                <form method='post' action='a'">
+                    {% csrf_token %}    
+                    <button type="submit" class="btn btn-primary"> learn more </button>
                 </form>
                 
                 <br> <br> 
-                <p> Not sure which editon to purchase? Click <a href="/#faq" target="_blank" > here </a> to see the FAQ </p>
+                
                 
             </div>
 </section>
 
-
-
 </body>
-
 
 </html>
 

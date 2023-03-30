@@ -10,6 +10,7 @@ urlpatterns=[
   path('survey_arabic<str:link>', views.survey_arabic, name='survey_arabic'),
   path('survey_english', views.survey_english, name='survey_english'),
 
+
   path('<str:user_id>/<str:user_name>/arabic_confirmation', views.arabic_confirmation, name='arabic_confirmation'),
   path('<str:user_id>/<str:user_name>/arabic_2_confirmation', views.arabic_2_confirmation, name='arabic_2_confirmation'),
   path('<str:user_id>/<str:user_name>/arabic_3_confirmation', views.arabic_3_confirmation, name='arabic_3_confirmation'),
@@ -22,10 +23,16 @@ urlpatterns=[
   path('<str:user_id>/<str:user_name>/paypal', views.paypal, name='paypal'),
   path('<str:user_id>/<str:user_name>/paypal_success', views.paypal_success, name='paypal_success'),
   path('<str:user_id>/<str:user_name>/c', views.c, name='c'),
+  path('<str:user_id>/<str:user_name>/a', views.a, name='a'),
+  path('<str:user_id>/<str:user_name>/l', views.l, name='l'),
   path('<str:user_id>/<str:user_name>/no_coupon', views.no_coupon, name='no_coupon'),
   path('<str:user_id>/<str:user_name>/coupon', views.coupon, name='coupon'),
-
+  path('member_login', views.member_login, name='member_login'),
+  path('<str:user_id>/<str:user_name>/member_login', views.member_login, name='member_login'),
+  path('<str:user_id>/<str:user_name>/affiliate', views.affiliate, name='affiliate'),
   path('<str:user_id>/<str:user_name>/download_receipt', views.download_receipt, name='download_receipt'),
-
+  path('member_info', views.member_info, name='member_info'),
+  path('<str:user_id>/<str:user_name>/member_info', views.member_info, name='member_info'),
+  
   path('RIASEC_survey_arabic', views.RIASEC_survey_arabic, name='RIASEC_survey_arabic'),
 ]

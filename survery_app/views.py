@@ -18,6 +18,7 @@ import datetime
 
 import jinja2
 
+
 # Create your views here.
 def home(request):
   return render(request, "home.html")
@@ -25,7 +26,7 @@ def home(request):
 def survey_arabic(request):
     if request.method == 'POST':
         #print(request.POST)
-        questions=question.objects.all()  
+        questions=question.objects.all()
 
         # print("we are printng the user name now")
         # print(request.GET.get("user_name"))
@@ -33,7 +34,7 @@ def survey_arabic(request):
         # get user name and email
         if request.POST.get("user_name") == "":
           return render(request, "name_and_email.html")
-          
+
         if request.POST.get("user_email") == "":
           return render(request, "name_and_email.html")
 
@@ -43,7 +44,7 @@ def survey_arabic(request):
         user_name = request.POST.get("user_name")
         user_email = request.POST.get("user_email")
         user_phone = request.POST.get("user_phone")
-        
+
 
         affinity_1 = 0
         affinity_2 = 0
@@ -69,52 +70,52 @@ def survey_arabic(request):
         for q in questions:
 
             if   request.POST.get(q.question_arabic_سؤال_عربي) == 'option1':
-              if q.group_مجموعة == 'Affinity':    
+              if q.group_مجموعة == 'Affinity':
                 affinity_1 = affinity_1 + q.rank_النقاط
                 affinity_1_heading = q.title_of_answer_choice_one_عنوان_الإجابة_الأول
 
-              if q.group_مجموعة == 'Collection of information':    
+              if q.group_مجموعة == 'Collection of information':
                 collection_1 = collection_1 + q.rank_النقاط
                 collection_1_heading = q.title_of_answer_choice_one_عنوان_الإجابة_الأول
-                
-              if q.group_مجموعة == 'Make decision':    
+
+              if q.group_مجموعة == 'Make decision':
                 make_1 = make_1 + q.rank_النقاط
                 make_1_heading = q.title_of_answer_choice_one_عنوان_الإجابة_الأول
 
-              if q.group_مجموعة == 'Time spending':    
+              if q.group_مجموعة == 'Time spending':
                 time_1 = time_1 + q.rank_النقاط
                 time_1_heading = q.title_of_answer_choice_one_عنوان_الإجابة_الأول
 
             if   request.POST.get(q.question_arabic_سؤال_عربي) == 'option2':
-              if q.group_مجموعة == 'Affinity':    
+              if q.group_مجموعة == 'Affinity':
                 affinity_2 = affinity_2 + q.rank_النقاط
                 affinity_2_heading = q.title_of_answer_choice_two_عنوان_الإجابة_الثاني
 
-              if q.group_مجموعة == 'Collection of information':    
+              if q.group_مجموعة == 'Collection of information':
                 collection_2 = collection_2 + q.rank_النقاط
                 collection_2_heading = q.title_of_answer_choice_two_عنوان_الإجابة_الثاني
-                
-              if q.group_مجموعة == 'Make decision':    
+
+              if q.group_مجموعة == 'Make decision':
                 make_2 = make_2 + q.rank_النقاط
                 make_2_heading = q.title_of_answer_choice_two_عنوان_الإجابة_الثاني
 
-              if q.group_مجموعة == 'Time spending':    
+              if q.group_مجموعة == 'Time spending':
                 time_2 = time_2 + q.rank_النقاط
                 time_2_heading = q.title_of_answer_choice_two_عنوان_الإجابة_الثاني
-            
+
             if   request.POST.get(q.question_arabic_سؤال_عربي) == None:
               missing_questions.append(q)
-            
+
         print(missing_questions)
 
         if len(missing_questions) > 0:
-           
+
            j = '#' + str(missing_questions[0].id)
            context = {
             'missing_questions':missing_questions ,
             'jump' : j ,
             'length' : str(len(missing_questions))
-           } 
+           }
            return render(request , 'incomplete_survey.html', context)
 
 
@@ -141,9 +142,9 @@ def survey_arabic(request):
           time_result = time_1_heading
         else:
           time_result = time_2_heading
-      
 
-        
+
+
         if affinity_result == affinity_1_heading and collection_result == collection_1_heading and make_result == make_1_heading and time_result == time_1_heading :
               pdf_answer_case = 1
         elif affinity_result == affinity_1_heading and collection_result == collection_1_heading and make_result == make_1_heading and time_result == time_2_heading :
@@ -177,7 +178,7 @@ def survey_arabic(request):
         elif affinity_result == affinity_2_heading and collection_result == collection_2_heading and make_result == make_2_heading and time_result == time_2_heading :
           pdf_answer_case = 16
 
-        
+
         # put results in result model
         #result.objects.all().delete()
         r = result(
@@ -210,7 +211,7 @@ def survey_arabic(request):
         r_id = r.id
 
         context = {
-          'affinity_result': affinity_result , 
+          'affinity_result': affinity_result ,
           'collection_result': collection_result ,
           'make_result': make_result,
           'time_result': time_result,
@@ -221,8 +222,8 @@ def survey_arabic(request):
         }
 
         return redirect('arabic_confirmation' , r_id , r.user_name)
-        
-          
+
+
 
 
     else:
@@ -231,10 +232,10 @@ def survey_arabic(request):
             'questions':questions
         }
         return render(request,'survey_arabic.html',context)
-  
+
 
 def arabic_confirmation(request , user_id , user_name):
-  # user_result = result.objects.latest('id') 
+  # user_result = result.objects.latest('id')
   user_result = result.objects.all()
   # print(user_id)
   for x in user_result:
@@ -247,7 +248,7 @@ def arabic_confirmation(request , user_id , user_name):
               user_result = x
 
   if request.method == 'POST':
-    x = group_choice_change.objects.latest('id') 
+    x = group_choice_change.objects.latest('id')
     if request.POST.get("affinity_result") == "option2":
       if user_result.affinity_result == "Extrovert":
         user_result.affinity_result = "Introvert"
@@ -257,7 +258,7 @@ def arabic_confirmation(request , user_id , user_name):
         x.affinity_Introvert_to_Extrovert = x.affinity_Introvert_to_Extrovert + 1
     user_result.save()
     x.save()
-  
+
     return redirect('arabic_2_confirmation' , user_id , user_name)
 
   if request.method == 'GET':
@@ -275,7 +276,7 @@ def arabic_confirmation(request , user_id , user_name):
 
 
 def arabic_2_confirmation(request , user_id , user_name):
-  #user_result = result.objects.latest('id') 
+  #user_result = result.objects.latest('id')
 
   user_result = result.objects.all()
   print(user_id)
@@ -287,7 +288,7 @@ def arabic_2_confirmation(request , user_id , user_name):
               user_result = x
 
   if request.method == 'POST':
-    x = group_choice_change.objects.latest('id') 
+    x = group_choice_change.objects.latest('id')
     if request.POST.get("collection_result") == "option2":
       if user_result.collection_result == "Sensing":
         user_result.collection_result = "Intuition"
@@ -315,7 +316,7 @@ def arabic_2_confirmation(request , user_id , user_name):
 
 
 def arabic_3_confirmation(request , user_id , user_name):
-  #user_result = result.objects.latest('id') 
+  #user_result = result.objects.latest('id')
 
   user_result = result.objects.all()
   print(user_id)
@@ -327,7 +328,7 @@ def arabic_3_confirmation(request , user_id , user_name):
               user_result = x
 
   if request.method == 'POST':
-    x = group_choice_change.objects.latest('id') 
+    x = group_choice_change.objects.latest('id')
     if request.POST.get("make_result") == "option2":
       if user_result.make_result == "Thinking":
         user_result.make_result = "Feeling"
@@ -341,12 +342,12 @@ def arabic_3_confirmation(request , user_id , user_name):
     return redirect('arabic_4_confirmation' , user_id , user_name)
 
   if request.method == 'GET':
-        
+
     change = ""
     if  user_result.make_result == "Feeling":
           change = change + "Thinking"
     else:
-          change = change + "Feeling"  
+          change = change + "Feeling"
 
     context = {
       "make_result" : user_result.make_result,
@@ -356,8 +357,8 @@ def arabic_3_confirmation(request , user_id , user_name):
 
 
 def arabic_4_confirmation(request , user_id , user_name):
-  
-  #user_result = result.objects.latest('id') 
+
+  #user_result = result.objects.latest('id')
 
   user_result = result.objects.all()
   print(user_id)
@@ -369,7 +370,7 @@ def arabic_4_confirmation(request , user_id , user_name):
               user_result = x
 
   if request.method == 'POST':
-    x = group_choice_change.objects.latest('id') 
+    x = group_choice_change.objects.latest('id')
     if request.POST.get("time_result") == "option2":
       if user_result.time_result == "Judging":
         user_result.time_result = "Perceiving"
@@ -383,13 +384,13 @@ def arabic_4_confirmation(request , user_id , user_name):
     return redirect('after_survey_arabic' , user_id , user_name)
 
   if request.method == 'GET':
-        
+
 
     change = ""
     if  user_result.time_result == "Judging":
           change = change + "Perceiving"
     else:
-          change = change + "Judging"  
+          change = change + "Judging"
 
     context = {
       "time_result" : user_result.time_result,
@@ -399,11 +400,11 @@ def arabic_4_confirmation(request , user_id , user_name):
 
 
 def after_survey_arabic(request , user_id , user_name):
-  
-      
+
+
    if request.method == 'POST':
         return redirect('download_report_page' , user_id , user_name)
-  
+
    if request.method == 'GET':
 
     r = result.objects.all()
@@ -415,14 +416,14 @@ def after_survey_arabic(request , user_id , user_name):
                 print("found")
                 r = x
 
-    #r = result.objects.latest('id') 
+    #r = result.objects.latest('id')
     four_letter_code = ""
 
     # for some reason, Intuition is not I but N in the pdf drive.
-    if r.collection_result[0] == "S":    
+    if r.collection_result[0] == "S":
       four_letter_code = four_letter_code + r.affinity_result[0] + r.collection_result[0] + r.make_result[0] + r.time_result[0]
 
-    if r.collection_result[0] == "I":    
+    if r.collection_result[0] == "I":
         four_letter_code = four_letter_code + r.affinity_result[0] + "N" + r.make_result[0] + r.time_result[0]
 
     r.four_letter_code = four_letter_code
@@ -440,7 +441,7 @@ def after_survey_arabic(request , user_id , user_name):
     #print(pdf_free)
 
     #download pdf file
-        
+
     context = {
                 'time': r.time,
 
@@ -465,22 +466,38 @@ def after_survey_arabic(request , user_id , user_name):
 
                   }
 
-    
-      
+
+
     return render(request, "after_survey_arabic.html" , context)
 
 
 def download_report_page(request , user_id , user_name):
-          
+
   if request.method == 'GET':
       # Load the template
+
+      import re
+      name = re.sub(' ', '%', user_name)
+      l = 'http://sulemaan.pythonanywhere.com/'+ user_id + '/' + name + '/' + 'download_report_page'
+
+      # Get all marketers
+      marketers_list = marketers.objects.all()
+
+        # Check if the link is found in any marketer's reports
+      for marketer in marketers_list:
+          if l in marketer.link:
+                marketer.number_of_visits += 1
+                marketer.save()
+
+
       return render(request, 'download_report_page.html')
 
 def download_report_free(request , user_id , user_name):
 
           from django.conf import settings
-          import PyPDF2 
+          import PyPDF2
           from PyPDF2 import PdfMerger
+
 
           # get user details from backend
           user_result = result.objects.all()
@@ -497,33 +514,33 @@ def download_report_free(request , user_id , user_name):
 
           # report file name fromm 16 reports
           import re
-          user_name = re.sub(' ', '%', user_name)
+          name = re.sub(' ', '%', user_name)
 
-
-          l = 'http://sulemaan.pythonanywhere.com/'+ user_id + '/' + user_name + '/' + 'download_report_page'
+          l = 'http://sulemaan.pythonanywhere.com/'+ user_id + '/' + name + '/' + 'download_report_page'
           r.link = l
           r.save()
 
+          # Get all marketers
+          marketers_list = marketers.objects.all()
+
+            # Check if the link is found in any marketer's reports
+          for marketer in marketers_list:
+              if l in marketer.link:
+                    marketer.number_of_free_downloads += 1
+                    marketer.save()
+
           pdf_file_name = str(user_id) + "_" + user_name + "_" + r.four_letter_code + '.pdf'
           personal_user_report =  str(settings.BASE_DIR) + "/survery_app/PDF/" + str(filename)
-
-
-
-          # mime_type, _ = mimetypes.guess_type(pdf_file_name)
-          # response = HttpResponse(path, content_type=mime_type)
-          # response['Content-Disposition'] = "attachment; filename=%s" % pdf_file_name
-          # return response
           import PyPDF2
-          
           path = open(personal_user_report, 'rb')
 
           from fpdf import FPDF
           pdf = FPDF('P', 'mm', (297.18, 420.116))
-          if pdf : 
+          if pdf :
             pdf.add_page()
             background_image =  str(settings.BASE_DIR) + "/survery_app/PDF/" + str("cover.png")
             pdf.image(background_image, x = 0, y = 0, w = 297.18, h = 420.116)
-            pdf.set_font('Arial', '', 80)  
+            pdf.set_font('Arial', '', 80)
             pdf.cell(200, 10, r.four_letter_code , ln = 2, align = 'L')
             pdf.ln(10)
 
@@ -533,7 +550,7 @@ def download_report_free(request , user_id , user_name):
             pdf.cell(200, 10, txt = 'Make Decision : ' + r.make_result , ln = 2, align = 'L')
             pdf.cell(200, 10, txt = 'Time Spending : ' + r.time_result , ln = 2, align = 'L')
 
-            pdf.set_font('Arial', '', 50)  
+            pdf.set_font('Arial', '', 50)
             pdf.ln(50)
             pdf.write(5, f"Free Personaility Report")
             pdf.ln(15)
@@ -549,7 +566,7 @@ def download_report_free(request , user_id , user_name):
             # pdf.cell(200, 10, txt = "Your personal link to the full premium version :" , ln = 1, align = 'c')
             pdf.write(5, f"Your personal link to the full premium version")
             pdf.ln(10)
-            pdf.set_font('Arial','B' ,15)  
+            pdf.set_font('Arial','B' ,15)
             pdf.cell(200, 10, txt = r.link  , ln = 2, align = 'L')
 
           # # save the pdf with name .pdf
@@ -581,26 +598,21 @@ def download_report_free(request , user_id , user_name):
 
           # Write the modified content to disk
           writer_output.write(output_file)
-                
-
           personal_user_report = "result.pdf"
-          # return http response of the pdf file 
+          # return http response of the pdf file
           path = open(personal_user_report, 'rb')
           mime_type, _ = mimetypes.guess_type(personal_user_report)
           response = HttpResponse(path, content_type=mime_type)
           response['Content-Disposition'] = "attachment; filename=%s" % pdf_file_name
 
-
-          
-
           #delete page.pdf and result.pdf to save space on pythonanywhere
-          
+
           return response
 
 
 def download_report_paid(request , user_id , user_name):
       from django.conf import settings
-      import PyPDF2 
+      import PyPDF2
       from PyPDF2 import PdfMerger
 
       # get user details from backend
@@ -615,7 +627,7 @@ def download_report_paid(request , user_id , user_name):
 
 
       import re
-      user_name = re.sub(' ', '%', user_name)
+      name = re.sub(' ', '%', user_name)
       r = user_result
       filename = r.pdf_paid
 
@@ -623,9 +635,20 @@ def download_report_paid(request , user_id , user_name):
       personal_user_report =  str(settings.BASE_DIR) + "/survery_app/PDF/" + str(filename)
       pdf_file_name = str(user_id) + "_" + user_name + "_" + r.four_letter_code + '.pdf'
 
-      l = 'http://sulemaan.pythonanywhere.com/'+ user_id + '/' + user_name + '/' + 'download_report_page'
+      l = 'http://sulemaan.pythonanywhere.com/'+ user_id + '/' + name + '/' + 'download_report_page'
       r.link = l
       r.save()
+
+      # Get all marketers
+      marketers_list = marketers.objects.all()
+
+            # Check if the link is found in any marketer's reports
+      for marketer in marketers_list:
+          if l in marketer.link:
+                marketer.number_of_paid_downloads += 1
+                #marketer.amount_earned = 
+                marketer.save()
+                
 
       path = open(personal_user_report, 'rb')
       # mime_type, _ = mimetypes.guess_type(pdf_file_name)
@@ -635,11 +658,11 @@ def download_report_paid(request , user_id , user_name):
 
       from fpdf import FPDF
       pdf = FPDF('P', 'mm', (297.18, 420.116))
-      if pdf : 
+      if pdf :
         pdf.add_page()
         background_image =  str(settings.BASE_DIR) + "/survery_app/PDF/" + str("cover.png")
         pdf.image(background_image, x = 0, y = 0, w = 297.18, h = 420.116)
-        pdf.set_font('Arial', '', 80)  
+        pdf.set_font('Arial', '', 80)
         pdf.cell(200, 10, r.four_letter_code , ln = 2, align = 'L')
         pdf.ln(10)
 
@@ -649,7 +672,7 @@ def download_report_paid(request , user_id , user_name):
         pdf.cell(200, 10, txt = 'Make Decision : ' + r.make_result , ln = 2, align = 'L')
         pdf.cell(200, 10, txt = 'Time Spending : ' + r.time_result , ln = 2, align = 'L')
 
-        pdf.set_font('Arial', '', 50)  
+        pdf.set_font('Arial', '', 50)
         pdf.ln(50)
         pdf.write(5, f"Full Personaility Report")
         pdf.ln(15)
@@ -665,7 +688,7 @@ def download_report_paid(request , user_id , user_name):
         # pdf.cell(200, 10, txt = "Your personal link to the full premium version :" , ln = 1, align = 'c')
         pdf.write(5, f"Your personal link to download again")
         pdf.ln(10)
-        pdf.set_font('Arial','B' ,15)  
+        pdf.set_font('Arial','B' ,15)
         pdf.cell(200, 10, txt = r.link  , ln = 2, align = 'L')
 
       # # save the pdf with name .pdf
@@ -697,10 +720,10 @@ def download_report_paid(request , user_id , user_name):
 
       # Write the modified content to disk
       writer_output.write(output_file)
-            
+
 
       personal_user_report = "result.pdf"
-      # return http response of the pdf file 
+      # return http response of the pdf file
       path = open(personal_user_report, 'rb')
       mime_type, _ = mimetypes.guess_type(personal_user_report)
       response = HttpResponse(path, content_type=mime_type)
@@ -709,8 +732,22 @@ def download_report_paid(request , user_id , user_name):
 
 def download_receipt(request , user_id , user_name):
       from django.conf import settings
-      import PyPDF2 
+      import PyPDF2
       from PyPDF2 import PdfMerger
+
+
+      import re
+      name = re.sub(' ', '%', user_name)
+      l = 'http://sulemaan.pythonanywhere.com/'+ user_id + '/' + name + '/' + 'download_report_page'
+
+      # Get all marketers
+      marketers_list = marketers.objects.all()
+
+        # Check if the link is found in any marketer's reports
+      for marketer in marketers_list:
+          if l in marketer.link:
+                marketer.number_of_receipt_downloads += 1
+                marketer.save()
 
       # get user details from backend
       user_result = result.objects.all()
@@ -731,11 +768,11 @@ def download_receipt(request , user_id , user_name):
       r = user_result
       from fpdf import FPDF
       pdf = FPDF('P', 'mm', (297.18, 420.116))
-      if pdf : 
+      if pdf :
         pdf.add_page()
         background_image =  str(settings.BASE_DIR) + "/survery_app/PDF/" + str("cover.png")
         pdf.image(background_image, x = 0, y = 0, w = 297.18, h = 420.116)
-        pdf.set_font('Arial', '', 80)  
+        pdf.set_font('Arial', '', 80)
         pdf.cell(200, 10, r.four_letter_code , ln = 2, align = 'L')
         pdf.ln(10)
 
@@ -745,7 +782,7 @@ def download_receipt(request , user_id , user_name):
         pdf.cell(200, 10, txt = 'Make Decision : ' + r.make_result , ln = 2, align = 'L')
         pdf.cell(200, 10, txt = 'Time Spending : ' + r.time_result , ln = 2, align = 'L')
 
-        pdf.set_font('Arial', '', 50)  
+        pdf.set_font('Arial', '', 50)
         pdf.ln(50)
         pdf.write(5, f"receipt")
         pdf.ln(15)
@@ -764,11 +801,11 @@ def download_receipt(request , user_id , user_name):
         # pdf.cell(200, 10, txt = "Your personal link to the full premium version :" , ln = 1, align = 'c')
         pdf.write(5, f"Your personal link to download again")
         pdf.ln(10)
-        pdf.set_font('Arial','B' ,15)  
+        pdf.set_font('Arial','B' ,15)
         pdf.cell(200, 10, txt = r.link  , ln = 2, align = 'L')
 
         # # save the pdf with name .pdf
-        pdf.output("r.pdf" , 'F')  
+        pdf.output("r.pdf" , 'F')
 
 
       path = open("r.pdf", 'rb')
@@ -781,34 +818,143 @@ def download_receipt(request , user_id , user_name):
 def paypal(request):
     return render(request, "paypal.html")
 
-
 def paypal_success(request , user_id , user_name):
-  #r = result.objects.latest('id') 
+  #r = result.objects.latest('id')
 
-  r = result.objects.all()
-  print(user_id)
-  for x in r:
-        print(x.id)
-        print()
-        if str(x.id) == str(user_id):
-              print("found")
-              r = x
+  if request.method == 'GET':
+    import re
+    name = re.sub(' ', '%', user_name)
 
-  x = report_purchase_successful(
-          id_result_reference = user_id,
-          four_letter_code = r.four_letter_code,
-          user_name = r.user_name ,
-          user_email = r.user_email,
-          user_phone = r.user_phone,
-          date_and_time_of_purchase = datetime.datetime.now()
-          )
-  x.save()
+    l = 'http://sulemaan.pythonanywhere.com/'+ user_id + '/' + name + '/' + 'download_report_page'
+    
+
+        # Get all marketers
+    marketers_list = marketers.objects.all()
+
+              # Check if the link is found in any marketer's reports
+    for marketer in marketers_list:
+        if l in marketer.link:
+              marketer.number_of_payments += 1
+              #marketer.amount_earned = 
+              if marketer.number_of_payments <= 10:
+                    marketer.amount_earned = 0.3 * 9.99 * marketer.number_of_payments
+              elif marketer.number_of_paid_downloads <= 100:
+                    tier1 = 0.3 * 9.99 * (marketer.number_of_payments - (marketer.number_of_payments - 10)) #10
+                    tier2 = 0.5 * 9.99 * (marketer.number_of_payments - 10) #remaining
+                    marketer.amount_earned = tier1 + tier2
+              else:
+                    tier1 = 0.3 * 9.99 * (marketer.number_of_payments - (marketer.number_of_payments - 10)) #10
+                    tier2 = 0.5 * 9.99 * (marketer.number_of_payments - (marketer.number_of_payments - 100)) #100
+                    tier3 = 0.75 * 9.99 * (marketer.number_of_payments - 100)
+                    marketer.amount_earned = tier1 + tier2 + tier3
+              marketer.save()
+
+    r = result.objects.all()
+    print(user_id)
+    for x in r:
+          print(x.id)
+          print()
+          if str(x.id) == str(user_id):
+                print("found")
+                r = x
+
+    x = report_purchase_successful(
+            id_result_reference = user_id,
+            four_letter_code = r.four_letter_code,
+            user_name = r.user_name ,
+            user_email = r.user_email,
+            user_phone = r.user_phone,
+            date_and_time_of_purchase = datetime.datetime.now()
+            )
+    x.save()
 
 
-  return render(request, "paypal_success.html")
+    return render(request, "paypal_success.html")
 
 def c(request , user_id , user_name):
     return redirect('coupon' , user_id , user_name)
+
+
+def a(request , user_id , user_name):
+      return redirect('affiliate' , user_id , user_name)
+
+def l(request , user_id , user_name):
+      return redirect('member_login')
+
+
+def member_login(request):
+      
+      if request.method == 'GET':
+            return render(request, 'member_login.html')
+      
+      from django.contrib import messages
+      
+      if request.method == 'POST':
+            paypal_email = request.POST['paypal_email']
+            password = request.POST['password']
+            try:
+                member = marketers.objects.get(paypal_email=paypal_email, password=password)
+                # Redirect to member info page if login is successful
+
+                context = {'marketer': member}
+                return render(request, 'member_info.html', context)
+
+            except marketers.DoesNotExist:
+                # Display error message if login is unsuccessful
+                messages.error(request, 'Invalid email or password')
+            # Render member login page if request method is GET
+            return render(request, 'member_login.html')
+
+
+def member_info(request, member):
+    marketers_list = marketers.objects.all()
+    context = {'marketers_list': marketers_list}
+    return render(request, 'member_info.html', context)
+
+      
+      
+
+def affiliate(request, user_id, user_name):
+    if request.method == 'GET':
+
+        context = {
+            'user_id' : user_id ,
+            'user_name':user_name ,
+           }
+
+        return render(request, 'affiliate_home.html', context)
+
+    if request.method == 'POST':
+          pp = request.POST.get("paypal_link")
+          password = request.POST.get("password")
+
+          import re
+          name = re.sub(' ', '%', user_name)
+          l = 'http://sulemaan.pythonanywhere.com/'+ user_id + '/' + name + '/' + 'download_report_page'
+
+          # Create a new instance of the marketers model and set its fields
+          new_marketer = marketers(
+              member_id = user_id,
+              user_name = user_name,
+              user_email = result.objects.get(id=user_id).user_email,
+              link = l,
+              paypal_email = pp,
+              password = password,
+          )
+
+          # Save the new marketer to the database
+          new_marketer.save()
+
+          context = {
+            'user_id' : user_id ,
+            'user_name':user_name ,
+           }
+
+          return render(request, 'affiliate_members.html', context)
+
+
+
+
 
 def coupon(request , user_id , user_name):
   from survery_app.models import coupon
@@ -817,7 +963,8 @@ def coupon(request , user_id , user_name):
   if request.method == 'GET':
         return render(request, 'coupon.html')
 
-  if request.method == 'POST':  
+
+  if request.method == 'POST':
 
     if request.POST.get("coupon"):
       user_input_coupon = request.POST.get("coupon")
@@ -829,11 +976,11 @@ def coupon(request , user_id , user_name):
       for c in all_coupon_codes:
         print(c.code)
         if (c.code) == user_input_coupon:
-              
+
               print("the code is : ")
               print(user_input_coupon)
               print()
-              
+
               #expired TODO
               print("the expire date is : ")
               print(c.expire_date)
@@ -867,7 +1014,7 @@ def coupon(request , user_id , user_name):
 
               c.usage_limit = c.usage_limit - 1
               c.save()
-              m = "your coupon " + user_input_coupon +  " is valid and has a worth of " + str(c.value) 
+              m = "your coupon " + user_input_coupon +  " is valid and has a worth of " + str(c.value)
               price = round(9.99 - float(c.value) , 2)
 
               context = {
@@ -876,7 +1023,7 @@ def coupon(request , user_id , user_name):
               }
               return render(request, 'paypal.html' , context )
 
-    
+
     context = {
                 "message" : "coupon is NOT valid , please re try",
               }
@@ -884,7 +1031,7 @@ def coupon(request , user_id , user_name):
 
 
 def no_coupon(request , user_id , user_name):
-  
+
   price = 9.99
   context = {
                 "message" : " you did not use a coupon ",
@@ -906,7 +1053,7 @@ def survey_english(request):
         else:
           user_name = request.POST.get(name)
 
-        
+
         if   request.POST.get(email) == None:
           return render(request,'name_and_email.html')
         else:
@@ -932,48 +1079,48 @@ def survey_english(request):
 
         for q in questions:
             if   request.POST.get(q.question_english_سؤال_الانجليزي) == 'option1':
-              if q.group_مجموعة == 'Affinity':    
+              if q.group_مجموعة == 'Affinity':
                 affinity_1 = affinity_1 + q.rank_النقاط
                 affinity_1_heading = q.title_of_answer_choice_one_عنوان_الإجابة_الأول
 
-              if q.group_مجموعة == 'Collection of Information':    
+              if q.group_مجموعة == 'Collection of Information':
                 collection_1 = collection_1 + q.rank_النقاط
                 collection_1_heading = q.title_of_answer_choice_one_عنوان_الإجابة_الأول
-                
-              if q.group_مجموعة == 'Make decison':    
+
+              if q.group_مجموعة == 'Make decison':
                 make_1 = make_1 + q.rank_النقاط
                 make_1_heading = q.title_of_answer_choice_one_عنوان_الإجابة_الأول
 
-              if q.group_مجموعة == 'Time spending':    
+              if q.group_مجموعة == 'Time spending':
                 time_1 = time_1 + q.rank_النقاط
                 time_1_heading = q.title_of_answer_choice_one_عنوان_الإجابة_الأول
 
             if   request.POST.get(q.question_english_سؤال_الانجليزي) == 'option2':
-              if q.group_مجموعة == 'Affinity':    
+              if q.group_مجموعة == 'Affinity':
                 affinity_2 = affinity_2 + q.rank_النقاط
                 affinity_2_heading = q.title_of_answer_choice_two_عنوان_الإجابة_الثاني
 
-              if q.group_مجموعة == 'Collection of Information':    
+              if q.group_مجموعة == 'Collection of Information':
                 collection_2 = collection_2 + q.rank_النقاط
                 collection_2_heading = q.title_of_answer_choice_two_عنوان_الإجابة_الثاني
-                
-              if q.group_مجموعة == 'Make decison':    
+
+              if q.group_مجموعة == 'Make decison':
                 make_2 = make_2 + q.rank_النقاط
                 make_2_heading = q.title_of_answer_choice_two_عنوان_الإجابة_الثاني
 
-              if q.group_مجموعة == 'Time spending':    
+              if q.group_مجموعة == 'Time spending':
                 time_2 = time_2 + q.rank_النقاط
                 time_2_heading = q.title_of_answer_choice_two_عنوان_الإجابة_الثاني
-            
+
             if   request.POST.get(q.question_english_سؤال_الانجليزي) == None:
                 return render(request,'incomplete_survey.html')
 
-            
+
 
             print("this is the request : ")
             print(request.POST.get(q.question_english_سؤال_الانجليزي))
             print()
-        
+
         affinity_result = ""
         if affinity_1 > affinity_2:
           affinity_result = affinity_1_heading
@@ -997,9 +1144,9 @@ def survey_english(request):
           time_result = time_1_heading
         else:
           time_result = time_2_heading
-      
 
-        
+
+
         if affinity_result == affinity_1_heading and collection_result == collection_1_heading and make_result == make_1_heading and time_result == time_1_heading :
               pdf_answer_case = 1
         elif affinity_result == affinity_1_heading and collection_result == collection_1_heading and make_result == make_1_heading and time_result == time_2_heading :
@@ -1041,7 +1188,7 @@ def survey_english(request):
         pdf.add_page()
         pdf.set_font("Arial", size = 15)
         pdf.cell(200, 10, txt = "welcome to your report", ln = 1, align = 'C')
-        
+
         # add another cell
         pdf.cell(200, 10, txt = "this is the free version", ln = 2, align = 'C')
 
@@ -1050,13 +1197,13 @@ def survey_english(request):
         pdf.cell(200, 10, txt = 'according to the make decision group, you are : ' + make_result , ln = 2, align = 'L')
         pdf.cell(200, 10, txt = 'according to the time spending group, you are : ' + time_result , ln = 2, align = 'L')
 
-        
+
         # save the pdf with name .pdf
-        pdf.output(pdf_file_name) 
+        pdf.output(pdf_file_name)
         pdf = pdf_file_name
 
 
-        
+
         context = {
             'time': request.POST.get('timer'),
 

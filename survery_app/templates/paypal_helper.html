@@ -1,0 +1,25 @@
+
+{% extends 'index.html' %}
+
+{% block content %}
+    <br>  <br> <br>  <br> <br>  <br> 
+    <head> <title> confirmation </title </head>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>confirmation</title>
+</head>
+
+
+</style>
+
+<body>
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Continue">
+    </form>
+</body>
+</html>
+{% endblock %}

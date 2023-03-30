@@ -1,0 +1,78 @@
+To display the table in a vertical format, you can use CSS to style the table. Here's an example:
+
+{% extends 'index.html' %}
+
+{% block content %}
+
+<br> <br> <br> <br>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{user_name }} Info</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #eee;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ marketer.user_name }} Info</h1>
+    <table>
+        <tr>
+            <th>Member ID:</th>
+            <td>{{ marketer.member_id }}</td>
+        </tr>
+        <tr>
+            <th>User Name:</th>
+            <td>{{ marketer.user_name }}</td>
+        </tr>
+        <tr>
+            <th>Link:</th>
+            <td>{{ marketer.link }}</td>
+        </tr>
+        <tr>
+            <th>User Email:</th>
+            <td>{{ marketer.user_email }}</td>
+        </tr>
+        <tr>
+            <th>PayPal Email:</th>
+            <td>{{ marketer.paypal_email }}</td>
+        </tr>
+        <tr>
+            <th>Password:</th>
+            <td>{{ marketer.password }}</td>
+        </tr>
+        <tr>
+            <th>Number of Visits:</th>
+            <td>{{ marketer.number_of_visits }}</td>
+        </tr>
+        <tr>
+            <th>Number of Free Downloads:</th>
+            <td>{{ marketer.number_of_free_downloads }}</td>
+        </tr>
+        <tr>
+            <th>Number of Paid Downloads:</th>
+            <td>{{ marketer.number_of_paid_downloads }}</td>
+        </tr>
+        <tr>
+            <th>Number of Receipt Downloads:</th>
+            <td>{{ marketer.number_of_receipt_downloads }}</td>
+        </tr>
+        <tr>
+            <th>Amount Earned:</th>
+            <td>{{ marketer.amount_earned }}</td>
+        </tr>
+    </table>
+</body>
+</html>
+{% endblock %}

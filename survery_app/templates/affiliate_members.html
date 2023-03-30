@@ -1,0 +1,21 @@
+
+{% extends 'index.html' %}
+
+{% block content %}
+
+
+<br> <br> <br> <br><br> <br>
+<h3> Thank you for registering {{user_name}}</h3>
+<br>
+<p> Please login to see your accout details </p>
+
+
+<h3> Member Login </h3>     
+
+<form method='post' action='l'">
+    {% csrf_token %}    
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>   <br> <br>  <br> 
+
+
+{% endblock %}
