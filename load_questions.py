@@ -9,7 +9,6 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE" , "survery_project.settings")
 # python3 load_questions.py
 # python3 manage.py createsuperuser
 # python3 manage.py runserver
-# create group_choice_change row in models and set everything to 0
 
 import django
 django.setup()
